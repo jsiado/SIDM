@@ -3,6 +3,33 @@
 # Any nested collections created by "<<" or '*' operations will be flattened in sidm_processor.py
 
 
+############################
+## TRG EFF HISTS
+###########################
+
+hlttrigger_base: &hlttrigger_base
+  - "HLT_DoubleL2Mu23NoVtx_2Cha"
+  - "HLT_DoubleL2Mu23NoVtx_2Cha_NoL2Matched"
+  - "HLT_DoubleL2Mu23NoVtx_2Cha_CosmicSeed"
+  - "HLT_DoubleL2Mu23NoVtx_2Cha_NoL2Matched"
+  
+trigobj_base: &trigobj_base
+  - "trigobj_n"
+  - "trigobj_pid"
+  - "trigobj_pt"
+  - "trigobj_pfmu_dR"
+  - "trigobj_dsamu_dR"
+  
+trigrecogen_base: &trigrecogen_base
+  - "dsaMuon1_genMu_ptRatio"
+
+
+
+
+
+
+############################
+###########################
 pv_base: &pv_base
   - "pv_n"
   - "pv_ndof"
@@ -22,6 +49,7 @@ photon_base: &photon_base
 muon_base: &muon_base
   - "muon_n"
   - "muon_pt"
+  - "muon_pt_hg"
   - "muon_eta_phi"
   - "muon_absD0"
   - "muon_absD0_lowRange"
@@ -29,6 +57,7 @@ muon_base: &muon_base
 dsaMuon_base: &dsaMuon_base
   - "dsaMuon_n"
   - "dsaMuon_pt"
+  - "dsaMuon_pt_hg"
   - "dsaMuon_eta_phi"
   - "dsaMuon_absD0"
   - "dsaMuon_absD0_lowRange"
@@ -112,6 +141,7 @@ genE_base: &genE_base
 genMu_base: &genMu_base
   - "genMu_n"
   - "genMu_pt"
+  - "genMu_pt_hg"
   - "genMu_pt_highRange"
   - "genMu0_pt"
   - "genMu1_pt"
@@ -122,8 +152,14 @@ genMu_base: &genMu_base
   - "genMu_genMu_dR_lowRange"
   - "genMu_genMu_dEta"
   - "genMu_genMu_pt"
+  - "genMu_genMu_invmass"
   - "muon_genMu_dR"
   - "dsaMuon_genMu_dR"
+  - "dsaMuon_genMu_dR_lowRange"
+  - "muon_genMu_dR_lowRange"
+  - "muon_closest_genMu0"
+  - "muon_closest_genMu1"
+  - "muon_matched_genMus"
 
 genA_base: &genA_base
   - "genA_n"
@@ -233,3 +269,4 @@ base_plus_gen_resolution: &base_plus_gen_resolution
   - *genA_lj_2d
   - *lepton_genLepton_base
   - *lepton_genLepton_genA_base
+  

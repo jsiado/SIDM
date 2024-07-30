@@ -37,6 +37,11 @@ obj_cut_defs = {
         "looseID": lambda objs: check_bit(objs["muons"].selectors,0),
         "pT > 5 GeV": lambda objs: objs["muons"].pt > 5,
         "|eta| < 2.4": lambda objs: abs(objs["muons"].eta) < 2.4,
+        "muon_matched_genMus": lambda objs: dR(objs["muons"], objs["genMus"]) < 0.4,
+        #"dR(muons, genMus) < 0.4": lambda objs: dR(objs["muons"], objs["genMus"]) < 0.4,
+        #"mu closest genMu 0.4": lambda objs: objs["genMus"].nearest(objs["muons"], threshold=0.4).pt > 0, 
+
+       
     },
     "photons":{
         "pT > 20 GeV": lambda objs: objs["photons"].pt > 20,
@@ -71,4 +76,5 @@ evt_cut_defs = {
     # 2mu2e: leading two LJs contain exactly 1 mu-type and exactly 1 egm-type
     "2mu2e": lambda objs: ((ak.count_nonzero(objs["ljs"][:, :2].muon_n >= 2, axis=-1) == 1)
                            & (ak.count_nonzero(objs["ljs"][:, :2].muon_n == 0, axis=-1) == 1)),
+    "hlt": lambda objs: objs["hlttriggers"]==1,
 }

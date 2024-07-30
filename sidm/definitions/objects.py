@@ -7,7 +7,7 @@ primary_objs = {
     "cosmicveto": lambda evts: evts.cosmicveto,
     "pvs": lambda evts: evts.pv,
     "electrons": lambda evts: evts.electron,
-    "photons": lambda evts: evts.pfphoton,
+    "photons": lambda evts: evts.photon,
     "muons": lambda evts: evts.muon,
     "dsaMuons": lambda evts: evts.dsamuon,
     "ntuple_ljs": lambda evts: evts.pfjet,
@@ -18,6 +18,8 @@ primary_objs = {
     "genAs": lambda evts: evts.gen[abs(evts.gen.pid) == 32],
     "genAs_toMu": lambda evts : evts.gen[(abs(evts.gen.pid)== 32) & (abs(evts.gen.daupid) == 13)],
     "genAs_toE": lambda evts : evts.gen[(abs(evts.gen.pid)== 32) & (abs(evts.gen.daupid) == 11)],
+    "trigobjs":   lambda evts : evts.trigobj,
+    "hlttriggers": lambda evts: evts.HLT_DoubleL2Mu23NoVtx_2Cha | evts.HLT_DoubleL2Mu23NoVtx_2Cha_NoL2Matched | evts.HLT_DoubleL2Mu23NoVtx_2Cha_CosmicSeed |            evts.HLT_DoubleL2Mu23NoVtx_2Cha_CosmicSeed_NoL2Matched,
 }
 
 # define objects whose definitions depend on analysis choices
@@ -33,4 +35,8 @@ derived_objs = {
     "genAs_toMu_matched_muLj": lambda objs, r: objs["genAs_toMu"][dR(objs["genAs_toMu"], objs["ljs"][(objs["ljs"].muon_n >= 2)]) < r],
     "genAs_matched_egmLj": lambda objs, r: objs["genAs"][dR(objs["genAs"], objs["ljs"][(objs["ljs"].muon_n == 0)]) < r],
     "genAs_toE_matched_egmLj": lambda objs, r: objs["genAs_toE"][dR(objs["genAs_toE"], objs["ljs"][(objs["ljs"].muon_n == 0)]) < r],
+
+    "muon_matched_genMus": lambda objs, r: matched(objs["muons"], objs["muons"][(objs["genMu0"])], r),
+    #"trigobj_pfmu_matched": lambda objs, r: objs["trigobjs"][dR(objs["trigobjs"], objs["muons"][(objs["ljs"].muon_n == 0)]) < r],
+    #"trigobj_dsamu_matched": lambda objs, r: objs["trigobjs"][dR(objs["trigobjs"], objs["dsamuons"][(objs["ljs"].muon_n == 0)]) < r],
 }

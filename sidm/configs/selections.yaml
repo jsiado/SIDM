@@ -4,6 +4,7 @@
 # Any nested collections created by "<<" or '*' operations will be flattened in sidm_processor.py
 
 
+
 # Cuts to apply to objects that are clustered into lepton jets
 ljsource_cuts: &ljsource_cuts
   obj_cuts: &obj_ljsource_cuts
@@ -116,3 +117,20 @@ baseNoLj_veryDisplacedA: &baseNoLj_veryDisplacedA
     <<: *obj_baseNoLj
     genAs:
       - "lxy >= 100 cm"
+
+
+############################
+###########################
+
+#trigger information
+hltt_cuts: &hltt_cuts
+  obj_cuts:
+    <<: *obj_baseNoLj
+  evt_cuts: &hlt
+    - "hlt"
+    
+#Selection cuts to match gen muons to reco muons
+baseNoLj_recogen: &baseNoLj_recogen
+  <<: *baseNoLj
+  obj_cuts:
+    <<: *obj_baseNoLj
