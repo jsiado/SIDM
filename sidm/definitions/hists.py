@@ -52,7 +52,7 @@ attr_labels = {
 }
 default_binnings = {
     "n":  (10, 0, 10),
-    "pt":  (100, 0, 100),
+    "pt":  (100, 0, 400),
     "eta": (50, -3, 3),
     "phi": (50, -1*math.pi, math.pi),
     "lxy": (100, 0, 100),
@@ -295,12 +295,21 @@ hist_defs = {
                    lambda objs, mask: dR(objs["photons"], objs["genEs"]))
         ],
     ),
+    #PF muon ID. w
+    "muon_global_pt": h.Histogram(
+        [
+            h.Axis(hist.axis.Regular(100, 0, 400, name="muon_global_pt",
+                                     label="Global muon p_T [GeV]"),
+                   lambda objs, mask: objs["muons"][mask, 0].pt),
+        ],
+        evt_mask = lambda objs: ak.num(objs["muons"]) > 0,
+    ),
     # pfmuon
     "muon_n": obj_attr("muons", "n"),
     "muon_pt":obj_attr("muons", "pt"),
     "muon_eta_phi": obj_eta_phi("muons"),
     "muon_absD0": obj_attr("muons", "dxy", absval=True, xmax=500),
-    "muon_absD0_lowRange": obj_attr("muons", "dxy", absval=True, xmax=10),
+    "muon_absD0_lowRange": obj_attr("muons", "dxy", absval=True, xmax=210),
     "muon_nearGenA_n": h.Histogram(
         [
             # number of muons within dR=0.5 of a genA that decays to muons
@@ -328,12 +337,42 @@ hist_defs = {
                    lambda objs, mask: dR(objs["muons"], objs["genMus"]))
         ],
     ),
+    "muon_dR": h.Histogram(
+        [# dR(photon, nearest gen e)
+            h.Axis(hist.axis.Regular(50, 0, 2*math.pi, name="muon_dR"),
+                   lambda objs, mask: dR(objs["muons"], objs["muons"]))
+        ],
+    ),
+    
     # dsamuon
     "dsaMuon_n": obj_attr("dsaMuons", "n"),
     "dsaMuon_pt":obj_attr("dsaMuons", "pt"),
+    "dsaMuon0_pt": h.Histogram(
+        [
+            h.Axis(hist.axis.Regular(100, 0, 400, name="dsaMuon0_pt",
+                                     label="Leading DSA Muon p_T [GeV]"),
+                   lambda objs, mask: objs["dsaMuons"][mask, 0].pt),
+        ],
+        evt_mask=lambda objs: ak.num(objs["dsaMuons"]) > 0,
+    ),
+    "dsaMuon1_pt": h.Histogram(
+        [
+            h.Axis(hist.axis.Regular(100, 0, 400, name="dsaMuon1_pt",
+                                     label="subLeading DSA Muon p_T [GeV]"),
+                   lambda objs, mask: objs["dsaMuons"][mask, 0].pt),
+        ],
+        evt_mask=lambda objs: ak.num(objs["dsaMuons"]) > 0,
+    ),
     "dsaMuon_eta_phi": obj_eta_phi("dsaMuons"),
     "dsaMuon_absD0": obj_attr("dsaMuons", "dxy", absval=True, xmax=500),
     "dsaMuon_absD0_lowRange": obj_attr("dsaMuons", "dxy", absval=True, xmax=10),
+    "dsaMu_dR": h.Histogram(
+        [# dR(photon, nearest gen e)
+            h.Axis(hist.axis.Regular(50, 0, 2*math.pi, name="dsaMu_dR"),
+                   lambda objs, mask: dR(objs["dsaMuons"], objs["dsaMuons"]))
+        ],
+    ),
+    
     "dsaMuon_nearGenA_n": h.Histogram(
         [
             # number of muons within dR=0.5 of a genA that decays to muons

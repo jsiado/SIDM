@@ -42,16 +42,29 @@ photon_base: &photon_base
 muon_base: &muon_base
   - "muon_n"
   - "muon_pt"
+  - "muon_dR"
   - "muon_eta_phi"
   - "muon_absD0"
   - "muon_absD0_lowRange"
+  - "muon_global_pt"
+  
+#hists for muon ID
+muonpfID_base: &muonpfID_base
+  - "muon_global_pt"
+
+# dsaMuonID_base: &dsaMuonID_base
+#   - "dsaMuon_global_pt"
 
 dsaMuon_base: &dsaMuon_base
   - "dsaMuon_n"
   - "dsaMuon_pt"
+  - "dsaMu_dR"
+  - "dsaMuon0_pt"
+  - "dsaMuon1_pt"
   - "dsaMuon_eta_phi"
   - "dsaMuon_absD0"
   - "dsaMuon_absD0_lowRange"
+  
 
 lj_base: &lj_base
   - "lj_n"
@@ -330,3 +343,6 @@ base_plus_gen_resolution: &base_plus_gen_resolution
   - *genA_lj_2d
   - *lepton_genLepton_base
   - *lepton_genLepton_genA_base
+  
+  
+

@@ -101,7 +101,7 @@ obj_cut_defs = {
         "bits2-9": lambda objs: check_bits(objs["electrons"].idbit,[2, 3, 4, 5, 6, 7, 8, 9]),
     },
     "muons": {
-        "looseID": lambda objs: objs["muons"].looseId,
+        #"looseID": lambda objs: objs["muons"].looseId,
         "pT > 5 GeV": lambda objs: objs["muons"].pt > 5,
         "|eta| < 2.4": lambda objs: abs(objs["muons"].eta) < 2.4,
     },

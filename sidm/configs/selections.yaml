@@ -970,3 +970,15 @@ baseNoLj_A_mumu_matched_pfDsaMuLj_highPT_LxyUpto400A_genMu_pT: &baseNoLj_A_mumu_
   evt_cuts: 
     - "genAs_toMu_matched_muLj"
     - "genMus"
+
+#study of the muon ID for loose and displaced
+muonID_loose: &muonID_loose
+  <<: *baseNoLj
+    obj_cuts:
+    <<: *obj_baseNoLj
+    muons:
+      - "pT > 5 GeV"
+      - "|eta| < 2.4"
+      - "isglobal"
+      - "isPFcand"
+      - "isTracker"
