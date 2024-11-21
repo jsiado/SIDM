@@ -295,21 +295,35 @@ hist_defs = {
                    lambda objs, mask: dR(objs["photons"], objs["genEs"]))
         ],
     ),
-    #PF muon ID. w
-    "muon_global_pt": h.Histogram(
+    #PF muon ID.
+    "muonID_pt": h.Histogram(
         [
-            h.Axis(hist.axis.Regular(100, 0, 400, name="muon_global_pt",
-                                     label="Global muon p_T [GeV]"),
-                   lambda objs, mask: objs["muons"][mask, 0].pt),
+            h.Axis(hist.axis.Regular(
+                100, 0, 400, name="muonID_pt",  
+                label="MuonID p_T [GeV]"), 
+                   lambda objs, mask: objs["muons"].pt),
         ],
-        evt_mask = lambda objs: ak.num(objs["muons"]) > 0,
+    #     # lambda objs, mask: objs["muons"].isGlobal,
     ),
+    
+    
+    
+    
+    
+    
+    
+    
+    
     # pfmuon
     "muon_n": obj_attr("muons", "n"),
     "muon_pt":obj_attr("muons", "pt"),
     "muon_eta_phi": obj_eta_phi("muons"),
     "muon_absD0": obj_attr("muons", "dxy", absval=True, xmax=500),
     "muon_absD0_lowRange": obj_attr("muons", "dxy", absval=True, xmax=210),
+    # "muon_isGlobal_pt": obj_attr("muons", "pt", isGlobal=True),
+    # "muon_isGlobal_pt": obj_attr("muons", "pt", "isGlobal"),
+    # "muon_isTracker_pt": obj_attr("muons", "pt", "isTracker"),
+    
     "muon_nearGenA_n": h.Histogram(
         [
             # number of muons within dR=0.5 of a genA that decays to muons

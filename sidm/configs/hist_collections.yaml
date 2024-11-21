@@ -46,11 +46,14 @@ muon_base: &muon_base
   - "muon_eta_phi"
   - "muon_absD0"
   - "muon_absD0_lowRange"
-  - "muon_global_pt"
+  - "muonID_pt"
+  # - "muon_isGlobal_pt"
+  # - "muon_isTracker_pt"
   
 #hists for muon ID
-muonpfID_base: &muonpfID_base
-  - "muon_global_pt"
+muonID_base: &muonID_base
+  - "muonID_pt"
+#   - "muon_isGlobal" 
 
 # dsaMuonID_base: &dsaMuonID_base
 #   - "dsaMuon_global_pt"

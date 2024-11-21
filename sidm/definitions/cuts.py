@@ -101,9 +101,15 @@ obj_cut_defs = {
         "bits2-9": lambda objs: check_bits(objs["electrons"].idbit,[2, 3, 4, 5, 6, 7, 8, 9]),
     },
     "muons": {
-        #"looseID": lambda objs: objs["muons"].looseId,
+        "looseID": lambda objs: objs["muons"].looseId,
         "pT > 5 GeV": lambda objs: objs["muons"].pt > 5,
         "|eta| < 2.4": lambda objs: abs(objs["muons"].eta) < 2.4,
+        ##ID Study
+        "pT > 50 GeV": lambda objs: objs["muons"].pt > 50,
+        "isglobal": lambda objs: ak.num(objs["muons"].isGlobal) > 0,
+        "istracker": lambda objs: ak.num(objs["muons"].isTracker) > 0,
+        "ispfcand": lambda objs: ak.num(objs["muons"].isPFcand) > 0,
+        
     },
     "photons":{
         "pT > 20 GeV": lambda objs: objs["photons"].pt > 20,
