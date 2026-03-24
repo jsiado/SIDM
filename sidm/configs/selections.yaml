@@ -1358,3 +1358,25 @@ baseNoLj_A_mumu_matched_lj_noPfMatch_highLjPt: &baseNoLj_A_mumu_matched_lj_noPfM
   evt_cuts:
     - *evt_pv_cuts
     - "genAs_toMu_matched_muLj"
+
+
+#based selections
+bkg_study:
+  obj_cuts:
+    electrons:
+      - "pT > 10 GeV"
+      - "|eta| < 2.4"
+    muons:
+      - "pT > 5 GeV"
+      - "|eta| < 2.4"
+      - "looseID"
+    dsaMuons:
+      - "pT > 10 GeV"
+      - "|eta| < 2.4"
+      - "displaced ID"
+      - "dR(dsa, pf) > dr_gmrm"
+      # - "all"
+      # - "all2"
+  evt_cuts:
+    - *evt_baseNoLj
+    - "genAs_toMu"
