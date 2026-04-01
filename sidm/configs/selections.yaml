@@ -1437,7 +1437,8 @@ dsa_eff_with_OR:
     - *evt_baseNoLj
     - "genAs_toMu"
     - "genMus"
-
+    
+##########################1
 bkg_study: #based selections
   obj_cuts:
     electrons:
@@ -1451,12 +1452,12 @@ bkg_study: #based selections
       - "pT > 10 GeV"
       - "|eta| < 2.4"
       - "displaced ID"
-      # - "all"
+      - "all"
   evt_cuts:
     - *evt_baseNoLj
     # - "genAs_toMu"
 
-bkg_study_iso: #adding isolation
+bkg_study_isopdisp: #adding isolation and displacement
   obj_cuts:
     electrons:
       - "pT > 10 GeV"
@@ -1474,6 +1475,8 @@ bkg_study_iso: #adding isolation
       
   postLj_obj_cuts:
     <<: *base_postLj_obj_cuts
+    ljs:
+      - "lj_iso < 0.2
     mu_ljs:
       - "displaced"
     egm_ljs:
