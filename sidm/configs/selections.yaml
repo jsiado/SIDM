@@ -1384,38 +1384,6 @@ muon_eff:
     - "genAs_toMu"
     - "genMus"
 
-# pf_eff:
-#   obj_cuts:
-#     muons:
-#       - "pT > 5 GeV"
-#       - "|eta| < 2.4"
-#       - "looseID"
-#     genMus:
-#       - "pT >= 10 GeV"
-#       - "parent == A"
-#       - "status 1"
-#       - "dR(gm0, gm1) > 0.2"
-#   evt_cuts:
-#     - *evt_baseNoLj
-#     - "genAs_toMu"
-#     - "genMus"
-    
-# dsa_eff:
-#   obj_cuts:
-#     dsaMuons:
-#       - "pT > 10 GeV"
-#       - "|eta| < 2.4"
-#       - "displaced ID"
-#     genMus:
-#       - "pT >= 10 GeV"
-#       - "parent == A"
-#       - "status 1"
-#       - "dR(gm0, gm1) > 0.2"
-#   evt_cuts:
-#     - *evt_baseNoLj
-#     - "genAs_toMu"
-#     - "genMus"
-
 dsa_eff_with_OR:
   obj_cuts:
     muons:
@@ -1438,13 +1406,21 @@ dsa_eff_with_OR:
     - "genAs_toMu"
     - "genMus"
 
+#####################################
+### BKG EFF NO Channels
+#####################################
 bkg_study_isopdisp: #adding isolation and displacement
   obj_cuts:
     electrons:
       - "pT > 10 GeV"
       - "|eta| < 2.4"
       -  'MVANonIsoWPL'
-      # - "lostHits"
+    photons:
+      - "pT > 20 GeV"
+      - "|eta| < 2.5"
+      - 'Custom Cutbased'
+      - "pixelSeed"
+      - 'Photon DR Veto 0p025'
     muons:
       - "pT > 5 GeV"
       - "|eta| < 2.4"
@@ -1466,24 +1442,4 @@ bkg_study_isopdisp: #adding isolation and displacement
       
   evt_cuts:
     - *evt_baseNoLj
-    # - "genAs_toMu"
-
-
-      - 'MVANonIsoWPL'
-    muons: &muons_ljsource_cuts
-      - "looseID"
-      - "pT > 5 GeV"
-      - "|eta| < 2.4"
-    photons: &photons_ljsource_cuts
-      - "pT > 20 GeV"
-      - "|eta| < 2.5"
-      - 'Custom Cutbased'
-      - "pixelSeed"
-      - 'Photon DR Veto 0p025'
-    dsaMuons: &dsaMuons_ljsource_cuts
-      - "pT > 10 GeV"
-      - "|eta| < 2.4"
-      - "displaced ID"
-      - "all" # cross-cleaning
-
     
