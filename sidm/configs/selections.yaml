@@ -1414,13 +1414,13 @@ bkg_study_isopdisp: #adding isolation and displacement
     electrons:
       - "pT > 10 GeV"
       - "|eta| < 2.4"
-      -  'MVANonIsoWPL'
+      - "MVANonIsoWPL"
     photons:
       - "pT > 20 GeV"
       - "|eta| < 2.5"
-      - 'Custom Cutbased'
+      - "Custom Cutbased"
       - "pixelSeed"
-      - 'Photon DR Veto 0p025'
+      - "Photon DR Veto 0p025"
     muons:
       - "pT > 5 GeV"
       - "|eta| < 2.4"
@@ -1434,7 +1434,7 @@ bkg_study_isopdisp: #adding isolation and displacement
   postLj_obj_cuts:
     <<: *base_postLj_obj_cuts
     ljs:
-      - "lj_iso < 0.2
+      - "lj_iso < 0.2"
     mu_ljs:
       - "displaced"
     egm_ljs:
