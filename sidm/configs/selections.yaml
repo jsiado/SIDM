@@ -1441,7 +1441,5 @@ bkg_study_isopdisp: #adding isolation and displacement
     egm_ljs:
       - "displaced"
       - "egm_lj_iso < 0.2"
-      
   evt_cuts:
     - *evt_baseNoLj
-    
