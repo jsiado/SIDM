@@ -3805,7 +3805,7 @@ llpNanoAOD_v2:
     4Mu_800GeV_1p2GeV_0p012mm:
       files:
       - CutDecayFalse_SIDM_BsTo2DpTo4Mu_MBs-800_MDp-1p2_ctau-0p012_v3_part-0.root
-      - CutDecayFalse_SIDM_BsTo2DpTo4Mu_MBs-800_MDp-1p2_ctau-0p012_v3_part-1.root
+      # - CutDecayFalse_SIDM_BsTo2DpTo4Mu_MBs-800_MDp-1p2_ctau-0p012_v3_part-1.root
       - CutDecayFalse_SIDM_BsTo2DpTo4Mu_MBs-800_MDp-1p2_ctau-0p012_v3_part-10.root
       - CutDecayFalse_SIDM_BsTo2DpTo4Mu_MBs-800_MDp-1p2_ctau-0p012_v3_part-11.root
       - CutDecayFalse_SIDM_BsTo2DpTo4Mu_MBs-800_MDp-1p2_ctau-0p012_v3_part-12.root

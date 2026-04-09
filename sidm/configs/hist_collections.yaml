@@ -770,6 +770,12 @@ lj_reco_effi_base: &lj_reco_effi_base
   - *genA_toMu_effi_base
   - *genA_toE_effi_base
 
+
+dsa_eff_study:
+  - "genMu_n"
+  - "genMu_pt"
+  - "den_genMu0_pt"
+
 BKG_study:
   - *lj_base
   - *lj_lj_base
@@ -777,3 +783,5 @@ BKG_study:
   - "muon_pt"
   - "dsaMuon_n"
   - "dsaMuon_pt"
+
+
