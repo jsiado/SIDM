@@ -1407,7 +1407,7 @@ dsa_eff_with_OR:
     - "genMus"
 
 #####################################
-### BKG EFF NO Channels
+### BKG channels
 #####################################
 bkg_study_isopdisp: #adding isolation and displacement
   obj_cuts:
@@ -1443,3 +1443,40 @@ bkg_study_isopdisp: #adding isolation and displacement
       - "egm_lj_iso < 0.2"
   evt_cuts:
     - *evt_baseNoLj
+
+bkg_study_isopdisp_1lj: #adding 1mujj and 1egmlj
+  obj_cuts:
+    electrons:
+      - "pT > 10 GeV"
+      - "|eta| < 2.4"
+      - "MVANonIsoWPL"
+    photons:
+      - "pT > 20 GeV"
+      - "|eta| < 2.5"
+      - "Custom Cutbased"
+      - "pixelSeed"
+      - "Photon DR Veto 0p025"
+    muons:
+      - "pT > 5 GeV"
+      - "|eta| < 2.4"
+      - "looseID"
+    dsaMuons:
+      - "pT > 10 GeV"
+      - "|eta| < 2.4"
+      - "displaced ID"
+      - "all"
+  postLj_obj_cuts:
+    <<: *base_postLj_obj_cuts
+    ljs:
+      - "pT > 30 GeV"
+      - "|eta| < 2.4"
+    mu_ljs:
+      - "displaced"
+      - "mu_lj_iso < 0.1"
+    egm_ljs:
+      - "displaced"
+      - "egm_lj_iso < 0.2"
+  evt_cuts:
+    - *evt_baseNoLj
+    - ">=1 egm_ljs"
+    - ">=1 mu_ljs"
