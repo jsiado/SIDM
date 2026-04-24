@@ -1516,11 +1516,5 @@ bkg_study_isopdisp_1lj_dP2: #adding dPhi > 2
   evt_cuts:
     - *evt_baseNoLj
     - ">=1 egm_ljs"
-    - "2mu2e"
-    - "dPhim2"
-    # - "dPhi(LJ_0, LJ_1) > 2"
-    # - "pass triggers" works
     - ">=1 mu_ljs"
-    # - "dPhim2"
-    # - "dPhi(LJ_0, LJ_1) > 2"
-    # - "2mu2e"
+    - "dPhi(LJ_0, LJ_1) > 2"

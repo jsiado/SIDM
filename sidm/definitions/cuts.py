@@ -48,7 +48,7 @@ obj_cut_defs = {
         "2gLj": lambda objs: (objs["egm_ljs"].electron_n == 0) & (objs["egm_ljs"].photon_n == 2),
         "egm_lj_iso < 0.2": lambda objs: objs["egm_ljs"].isolation < 0.2,
         "lostHits >= 1": lambda objs: ak.min(objs["egm_ljs"].electrons.trkNumPixelHits, axis=-1) >= 1,
-        "displaced": lambda objs: (ak.min(objs["egm_ljs"].egamma.lostHits, axis=-1) >= 1) 
+        "displaced": lambda objs: (ak.min(objs["egm_ljs"].egamma.lostHits, axis=-1) >= 1)
     },
     "mu_ljs": {
         "pfMuLj": lambda objs: (objs["mu_ljs"].pfMu_n > 0) & (objs["mu_ljs"].dsaMu_n == 0),
@@ -212,9 +212,7 @@ evt_cut_defs = {
     "Keep all evts": lambda objs: objs["pvs"].npvs >= 0,
     "pass triggers": lambda objs: (
           objs["hlt"].DoubleL2Mu23NoVtx_2Cha
-        | objs["hlt"].DoubleL2Mu23NoVtx_2Cha_NoL2Matched
         | objs["hlt"].DoubleL2Mu23NoVtx_2Cha_CosmicSeed
-        | objs["hlt"].DoubleL2Mu23NoVtx_2Cha_CosmicSeed_NoL2Matched
         | objs["hlt"].DoubleL2Mu25NoVtx_2Cha_Eta2p4
         | objs["hlt"].DoubleL2Mu25NoVtx_2Cha_CosmicSeed_Eta2p4
     ),
@@ -238,6 +236,5 @@ evt_cut_defs = {
     "50 GeV <= GenMu0_pT <= 60 GeV": lambda objs : (objs["genMus"][:, 0].pt >=50) & (objs["genMus"][:, 0].pt <=60),
     "genMus": lambda objs: ak.num(objs["genMus"]) > 1,
     "dR(Mu_0, Mu_1) > 0.03": lambda objs: objs["genMus"][:,0].delta_r(objs["genMus"][:,1]) > 0.03,
-    "dPhim2": lambda objs: abs(objs["ljs"][:,0].delta_phi(objs["ljs"][:,1])) > 2.0,
-    # "dPhi(LJ_0, LJ_1) > 2": lambda objs: abs(objs["ljs"][:,0].delta_phi(objs["ljs"][:,1])) > 2.0,
+    "dPhi(LJ_0, LJ_1) > 2": lambda objs: objs["ljs"][:, 0].delta_phi(objs["ljs"][:, 1]) > 2.0,
 }
