@@ -1515,6 +1515,8 @@ bkg_study_isopdisp_1lj_dP2: #adding dPhi > 2
       - "egm_lj_iso < 0.2"
   evt_cuts:
     - *evt_baseNoLj
-    - ">=1 egm_ljs"
-    - ">=1 mu_ljs"
+    - ">=2 LJs"
+    # - ">=1 egm_ljs"
+    # - ">=1 mu_ljs"
     - "dPhi(LJ_0, LJ_1) > 2"
+    
