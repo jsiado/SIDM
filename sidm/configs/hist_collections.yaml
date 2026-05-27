@@ -783,5 +783,7 @@ BKG_study:
   - "muon_pt"
   - "dsaMuon_n"
   - "dsaMuon_pt"
+  - "mulj_egmlj_invmass"
+  - "lj_lj_invmass_4mu"
 
 

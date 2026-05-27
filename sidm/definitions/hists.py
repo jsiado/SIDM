@@ -1723,6 +1723,14 @@ hist_defs = {
         ],
         evt_mask=lambda objs: ak.num(objs["ljs"]) > 1,
     ),
+    "lj_lj_invmass_4mu": h.Histogram( #jsc
+        [
+            h.Axis(hist.axis.Regular(100, 0, 1200, name="ljlj_mass",
+                                     label=r"Invariant Mass ($LJ_{0}$, $LJ_{1}$)"),
+                   lambda objs, mask: objs["mu_ljs"][mask, :2].sum().mass),
+        ],
+        evt_mask=lambda objs: ak.num(objs["mu_ljs"]) > 1,
+    ),
     "mulj_egmlj_invmass": h.Histogram(
         [
             h.Axis(hist.axis.Regular(100, 0, 1200, name="ljlj_mass",
