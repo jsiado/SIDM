@@ -1517,7 +1517,9 @@ bkg_study_isopdisp_2lj_dPhi_4mu: #adding dPhi > 2 for 4mu
   evt_cuts:
     - *evt_baseNoLj
     - ">=2 LJs"
-    - ">=2 mu_ljs"
+    - ">=1 egm_ljs"
+    - ">=1 mu_ljs"
+    # - ">=2 mu_ljs"
     - "dPhi(LJ_0, LJ_1) > 2"
 
 bkg_study_isopdisp_2lj_dPhi_2mu2e: #adding dPhi > 2
