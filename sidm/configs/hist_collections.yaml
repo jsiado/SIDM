@@ -786,4 +786,6 @@ BKG_study:
   - "mulj_egmlj_invmass"
   - "lj_lj_invmass_4mu"
 
-
+master:
+  - *gen_base
+  - *base
