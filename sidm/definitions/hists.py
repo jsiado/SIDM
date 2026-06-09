@@ -60,10 +60,10 @@ attr_labels = {
 }
 default_binnings = {
     "n":  (10, 0, 10),
-    "pt":  (100, 0, 100),
+    "pt":  (100, 0, 500),
     "eta": (50, -3, 3),
     "phi": (50, -1*math.pi, math.pi),
-    "lxy": (100, 0, 100),
+    "lxy": (100, 0, 500),
     "mass": (100, 0, 1000),
     "gamma": (100, 0, 5000),
     "status": (60, -30, 30),
@@ -2558,7 +2558,7 @@ hist_defs = {
     "genE_genE_dR": h.Histogram(
         [
             # dR(subleading gen E, leading gen E)
-            h.Axis(hist.axis.Regular(100, 0, 1.0, name="genE_genE_dR",
+            h.Axis(hist.axis.Regular(100, 0, 0.2, name="genE_genE_dR",
                                      label=r"$\Delta R$($e_0^{gen}$, $e_1^{gen}$)"),
                    lambda objs, mask: objs["genEs"][mask, 1].delta_r(objs["genEs"][mask, 0])),
         ],

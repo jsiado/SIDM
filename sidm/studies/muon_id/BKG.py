@@ -1,32 +1,10 @@
 #parameters
-nfiles = -1
-
-npl, fw, fh = 2, 16, 10
-vr = "05"
-
+# nfiles = -1
+nfiles = 3
+npl, fw, fh = 2, 16, 9
+vr = "04"
 
 sig_2mu = [
-    "2Mu2E_200GeV_5p0GeV_200p0mm",
-    "2Mu2E_500GeV_5p0GeV_80p0mm",
-    "2Mu2E_800GeV_5p0GeV_50p0mm",
-    "2Mu2E_1000GeV_5p0GeV_40p0mm",
-    
-    "2Mu2E_500GeV_0p25GeV_4p0mm",
-    "2Mu2E_500GeV_1p2GeV_19p0mm",
-    "2Mu2E_500GeV_5p0GeV_80p0mm",
-
-    "2Mu2E_500GeV_5p0GeV_0p08mm",
-    "2Mu2E_500GeV_5p0GeV_0p8mm",
-    "2Mu2E_500GeV_5p0GeV_8p0mm",
-    "2Mu2E_500GeV_5p0GeV_40p0mm",
-    "2Mu2E_500GeV_5p0GeV_80p0mm",
-]
-
-mxx_2mu = sig_2mu[:4]
-mzd_2mu = sig_2mu[4:7]
-lxy_2mu = sig_2mu[7:]
-
-sig_2mu_all = [
     # "2Mu2E_100GeV_0p25GeV_0p02mm",
     # "2Mu2E_100GeV_0p25GeV_0p2mm",
     # "2Mu2E_100GeV_0p25GeV_2p0mm",
@@ -93,7 +71,7 @@ sig_2mu_all = [
     # "2Mu2E_500GeV_1p2GeV_9p6mm",
     "2Mu2E_500GeV_1p2GeV_19p0mm",
     
-    # "2Mu2E_500GeV_5p0GeV_0p008mm",
+    # "2Mu2E_500GeV_5p0GeV_0p08mm",
     # "2Mu2E_500GeV_5p0GeV_0p08mm",
     # "2Mu2E_500GeV_5p0GeV_8p0mm",
     # "2Mu2E_500GeV_5p0GeV_40p0mm",
@@ -137,29 +115,6 @@ sig_2mu_all = [
 ]
 
 sig_4mu = [
-    "4Mu_200GeV_5p0GeV_200p0mm",
-    "4Mu_500GeV_5p0GeV_80p0mm",
-    "4Mu_800GeV_5p0GeV_50p0mm",
-    "4Mu_1000GeV_5p0GeV_40p0mm",
-
-    "4Mu_500GeV_0p25GeV_4p0mm",
-    "4Mu_500GeV_1p2GeV_19p0mm",
-    "4Mu_500GeV_5p0GeV_80p0mm",
-
-    "4Mu_500GeV_5p0GeV_0p08mm",
-    "4Mu_500GeV_5p0GeV_0p8mm",
-    "4Mu_500GeV_5p0GeV_8p0mm",
-    "4Mu_500GeV_5p0GeV_40p0mm",
-    "4Mu_500GeV_5p0GeV_80p0mm",
-    
-]
-
-
-mxx_4mu = sig_4mu[:4]
-mzd_4mu = sig_4mu[4:7]
-lxy_4mu = sig_4mu[7:]
-
-sig_4mu_all = [
     # "4Mu_100GeV_0p25GeV_0p02mm",
     # "4Mu_100GeV_0p25GeV_0p2mm",
     # "4Mu_100GeV_0p25GeV_2p0mm",
@@ -269,9 +224,7 @@ sig_4mu_all = [
     "4Mu_1000GeV_5p0GeV_40p0mm",
 ]
 
-channels = ["baseNoLj", "master_allevt", "baseNoLj_noTrigger"] #sel.yaml
+channels = ["baseNoLj", "master_allevt"] #sel.yaml
 
 ch1 = channels[0]
 ch2 = channels[1]
-ch3 = channels[2]
-# ch4 = channels[3]

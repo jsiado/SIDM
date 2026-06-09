@@ -1637,26 +1637,28 @@ bkg_study_isopdisp_2lj_dPhi1p8_2mu2e: #adding dPhi > 2
     - ">=1 mu_ljs"
     - "dPhi(LJ_0, LJ_1) > 1.8"
 
-master_allevt:
+gen_allevt:
   obj_cuts:
-    electrons:
-      - "pT > 10 GeV"
-      - "|eta| < 2.4"
-      - "MVANonIsoWPL"
+    "genEs":
+      - "status 1"
+      - "parent == A"
+      # - "MVANonIsoWPL"
     photons:
       - "pT > 20 GeV"
       - "|eta| < 2.5"
-      - "Custom Cutbased"
-      - "pixelSeed"
-      - "Photon DR Veto 0p025"
+      # - "Custom Cutbased"
+      # - "pixelSeed"
+      # - "Photon DR Veto 0p025"
     muons:
       - "pT > 5 GeV"
       - "|eta| < 2.4"
-      - "looseID"
+      # - "looseID"
     dsaMuons:
       - "pT > 10 GeV"
       - "|eta| < 2.4"
-      - "displaced ID"
-      - "all"
-  evt_cuts:
-    - *evt_baseNoLj
+      # - "displaced ID"
+      # - "all"
+  # evt_cuts:
+    # - *evt_pv_cuts
+    # - *evt_baseNoLj
+
