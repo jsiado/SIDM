@@ -822,4 +822,12 @@ Muon_selection_bkg_base: &Muon_selection_bkg_base
   - "mulj_egmlj_invmass"
   - "mu_lj_isolation"
 
-
+BKG_study:
+  - *gen_base
+  - *muon_base
+  - *dsaMuon_base
+  - *electron_base
+  - *lj_base
+  - *lj_lj_base
+  - "mulj_egmlj_invmass"
+  # - "lj_lj_invmass_4mu"

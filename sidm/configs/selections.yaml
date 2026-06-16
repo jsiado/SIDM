@@ -1724,3 +1724,371 @@ data_control_region_1egmLj_cosmic_veto: &data_control_region_1egmLj_cosmic_veto
     - "= 1 LJs"
     - "= 1 egmLJs"
     - "all cos_alpha(dsa, dsa) > -0.9"
+
+
+#####################################
+### BKG channels
+#####################################
+bkg_iso: #adding isolation
+  obj_cuts:
+    electrons:
+      - "pT > 10 GeV"
+      - "|eta| < 2.4"
+      - "MVANonIsoWPL"
+    photons:
+      - "pT > 20 GeV"
+      - "|eta| < 2.5"
+      - "Custom Cutbased"
+      - "pixelSeed"
+      - "Photon DR Veto 0p025"
+    muons:
+      - "pT > 5 GeV"
+      - "|eta| < 2.4"
+      - "looseID"
+    dsaMuons:
+      - "pT > 10 GeV"
+      - "|eta| < 2.4"
+      - "displaced ID"
+      - "all"
+  postLj_obj_cuts:
+    <<: *base_postLj_obj_cuts
+    ljs:
+      - "pT > 30 GeV"
+      - "|eta| < 2.4"
+    mu_ljs:
+      - "mu_lj_iso < 0.1"
+    egm_ljs:
+      - "egm_lj_iso < 0.2"
+  evt_cuts:
+    - *evt_baseNoLj
+
+bkg_iso_disp: #adding displacement
+  obj_cuts:
+    electrons:
+      - "pT > 10 GeV"
+      - "|eta| < 2.4"
+      - "MVANonIsoWPL"
+    photons:
+      - "pT > 20 GeV"
+      - "|eta| < 2.5"
+      - "Custom Cutbased"
+      - "pixelSeed"
+      - "Photon DR Veto 0p025"
+    muons:
+      - "pT > 5 GeV"
+      - "|eta| < 2.4"
+      - "looseID"
+    dsaMuons:
+      - "pT > 10 GeV"
+      - "|eta| < 2.4"
+      - "displaced ID"
+      - "all"
+  postLj_obj_cuts:
+    <<: *base_postLj_obj_cuts
+    ljs:
+      - "pT > 30 GeV"
+      - "|eta| < 2.4"
+    mu_ljs:
+      - "displaced"
+      - "mu_lj_iso < 0.1"
+    egm_ljs:
+      - "displaced"
+      - "egm_lj_iso < 0.2"
+  evt_cuts:
+    - *evt_baseNoLj
+
+bkg_iso_disp_2lj: #adding >2 LJ
+  obj_cuts:
+    electrons:
+      - "pT > 10 GeV"
+      - "|eta| < 2.4"
+      - "MVANonIsoWPL"
+    photons:
+      - "pT > 20 GeV"
+      - "|eta| < 2.5"
+      - "Custom Cutbased"
+      - "pixelSeed"
+      - "Photon DR Veto 0p025"
+    muons:
+      - "pT > 5 GeV"
+      - "|eta| < 2.4"
+      - "looseID"
+    dsaMuons:
+      - "pT > 10 GeV"
+      - "|eta| < 2.4"
+      - "displaced ID"
+      - "all"
+  postLj_obj_cuts:
+    <<: *base_postLj_obj_cuts
+    ljs:
+      - "pT > 30 GeV"
+      - "|eta| < 2.4"
+    mu_ljs:
+      - "displaced"
+      - "mu_lj_iso < 0.1"
+    egm_ljs:
+      - "displaced"
+      - "egm_lj_iso < 0.2"
+  evt_cuts:
+    - *evt_baseNoLj
+    - ">=2 LJs"
+
+bkg_iso_disp_2lj_2mu2e: #adding > 1 egmlj
+  obj_cuts:
+    electrons:
+      - "pT > 10 GeV"
+      - "|eta| < 2.4"
+      - "MVANonIsoWPL"
+    photons:
+      - "pT > 20 GeV"
+      - "|eta| < 2.5"
+      - "Custom Cutbased"
+      - "pixelSeed"
+      - "Photon DR Veto 0p025"
+    muons:
+      - "pT > 5 GeV"
+      - "|eta| < 2.4"
+      - "looseID"
+    dsaMuons:
+      - "pT > 10 GeV"
+      - "|eta| < 2.4"
+      - "displaced ID"
+      - "all"
+  postLj_obj_cuts:
+    <<: *base_postLj_obj_cuts
+    ljs:
+      - "pT > 30 GeV"
+      - "|eta| < 2.4"
+    mu_ljs:
+      - "displaced"
+      - "mu_lj_iso < 0.1"
+    egm_ljs:
+      - "displaced"
+      - "egm_lj_iso < 0.2"
+  evt_cuts:
+    - *evt_baseNoLj
+    - ">=2 LJs"
+    - "2mu2e"
+    # - ">=1 egm_ljs"
+    # - ">=1 mu_ljs"
+    # - "dPhi(LJ_0, LJ_1) > 2"
+
+bkg_iso_disp_2lj_4mu: #adding > 1 mulj
+  obj_cuts:
+    electrons:
+      - "pT > 10 GeV"
+      - "|eta| < 2.4"
+      - "MVANonIsoWPL"
+    photons:
+      - "pT > 20 GeV"
+      - "|eta| < 2.5"
+      - "Custom Cutbased"
+      - "pixelSeed"
+      - "Photon DR Veto 0p025"
+    muons:
+      - "pT > 5 GeV"
+      - "|eta| < 2.4"
+      - "looseID"
+    dsaMuons:
+      - "pT > 10 GeV"
+      - "|eta| < 2.4"
+      - "displaced ID"
+      - "all"
+  postLj_obj_cuts:
+    <<: *base_postLj_obj_cuts
+    ljs:
+      - "pT > 30 GeV"
+      - "|eta| < 2.4"
+    mu_ljs:
+      - "displaced"
+      - "mu_lj_iso < 0.1"
+    egm_ljs:
+      - "displaced"
+      - "egm_lj_iso < 0.2"
+  evt_cuts:
+    - *evt_baseNoLj
+    - ">=2 LJs"
+    - "4mu"
+    # - ">=2 mu_ljs"
+    # - "dPhi(LJ_0, LJ_1) > 2"
+
+bkg_iso_disp_2lj_2mu2e_dphi: #adding dphi
+  obj_cuts:
+    electrons:
+      - "pT > 10 GeV"
+      - "|eta| < 2.4"
+      - "MVANonIsoWPL"
+    photons:
+      - "pT > 20 GeV"
+      - "|eta| < 2.5"
+      - "Custom Cutbased"
+      - "pixelSeed"
+      - "Photon DR Veto 0p025"
+    muons:
+      - "pT > 5 GeV"
+      - "|eta| < 2.4"
+      - "looseID"
+    dsaMuons:
+      - "pT > 10 GeV"
+      - "|eta| < 2.4"
+      - "displaced ID"
+      - "all"
+  postLj_obj_cuts:
+    <<: *base_postLj_obj_cuts
+    ljs:
+      - "pT > 30 GeV"
+      - "|eta| < 2.4"
+    mu_ljs:
+      - "displaced"
+      - "mu_lj_iso < 0.1"
+    egm_ljs:
+      - "displaced"
+      - "egm_lj_iso < 0.2"
+  evt_cuts:
+    - *evt_baseNoLj
+    - ">=2 LJs"
+    - "2mu2e"
+    - "LJ-LJ dPhi > 2"
+
+bkg_iso_disp_2lj_4mu_dphi: #adding > 1 mulj
+  obj_cuts:
+    electrons:
+      - "pT > 10 GeV"
+      - "|eta| < 2.4"
+      - "MVANonIsoWPL"
+    photons:
+      - "pT > 20 GeV"
+      - "|eta| < 2.5"
+      - "Custom Cutbased"
+      - "pixelSeed"
+      - "Photon DR Veto 0p025"
+    muons:
+      - "pT > 5 GeV"
+      - "|eta| < 2.4"
+      - "looseID"
+    dsaMuons:
+      - "pT > 10 GeV"
+      - "|eta| < 2.4"
+      - "displaced ID"
+      - "all"
+  postLj_obj_cuts:
+    <<: *base_postLj_obj_cuts
+    ljs:
+      - "pT > 30 GeV"
+      - "|eta| < 2.4"
+    mu_ljs:
+      - "displaced"
+      - "mu_lj_iso < 0.1"
+    egm_ljs:
+      - "displaced"
+      - "egm_lj_iso < 0.2"
+  evt_cuts:
+    - *evt_baseNoLj
+    - ">=2 LJs"
+    - "4mu"
+    - "LJ-LJ dPhi > 2"
+
+#####################################
+### Thesis channels
+#####################################
+gen_evt:
+  obj_cuts:
+    genEs:
+      - "status 1"
+      # - "parent == A"
+    genMus:
+      - "pT >= 10 GeV"
+      - "status 1"
+  # evt_cuts:
+
+reco_evt:
+  obj_cuts:
+    electrons:
+      - "pT > 10 GeV"
+      - "|eta| < 2.4"
+      # - "MVANonIsoWPL"
+    photons:
+      - "pT > 20 GeV"
+      - "|eta| < 2.5"
+      # - "Custom Cutbased"
+      # - "pixelSeed"
+      # - "Photon DR Veto 0p025"
+    muons:
+      - "pT > 5 GeV"
+      - "|eta| < 2.4"
+      # - "looseID"
+    dsaMuons:
+      - "pT > 10 GeV"
+      - "|eta| < 2.4"
+      # - "displaced ID"
+      # - "all"
+  evt_cuts:
+    - *evt_pv_cuts
+    # - *evt_baseNoLj
+
+reco_evt_id:
+  obj_cuts:
+    electrons:
+      - "pT > 10 GeV"
+      - "|eta| < 2.4"
+      - "MVANonIsoWPL"
+    photons:
+      - "pT > 20 GeV"
+      - "|eta| < 2.5"
+      - "Custom Cutbased"
+      - "pixelSeed"
+      - "Photon DR Veto 0p025"
+    muons:
+      - "pT > 5 GeV"
+      - "|eta| < 2.4"
+      - "looseID"
+    dsaMuons:
+      - "pT > 10 GeV"
+      - "|eta| < 2.4"
+      - "displaced ID"
+      # - "all"
+  evt_cuts:
+    - *evt_pv_cuts
+    - *evt_baseNoLj
+
+reco_evt_id_cross:
+  obj_cuts:
+    electrons:
+      - "pT > 10 GeV"
+      - "|eta| < 2.4"
+      - "MVANonIsoWPL"
+    photons:
+      - "pT > 20 GeV"
+      - "|eta| < 2.5"
+      - "Custom Cutbased"
+      - "pixelSeed"
+      - "Photon DR Veto 0p025"
+    muons:
+      - "pT > 5 GeV"
+      - "|eta| < 2.4"
+      - "looseID"
+    dsaMuons:
+      - "pT > 10 GeV"
+      - "|eta| < 2.4"
+      - "displaced ID"
+      - "all"
+  postLj_obj_cuts:
+    <<: *base_postLj_obj_cuts
+    ljs:
+      - "pT > 30 GeV"
+      - "|eta| < 2.4"
+    # mu_ljs:
+      # - "displaced"
+      # - "mu_lj_iso < 0.1"
+    # egm_ljs:
+      # - "displaced"
+      # - "egm_lj_iso < 0.2"
+  evt_cuts:
+    - *evt_baseNoLj
+    - ">=2 LJs"
+    # - ">=1 egm_ljs"
+    # - ">=1 mu_ljs"
+    # - "dPhi(LJ_0, LJ_1) > 1.8"
+  # evt_cuts:
+    # - *evt_pv_cuts
+    # - *evt_baseNoLj
