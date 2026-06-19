@@ -13,7 +13,7 @@ import hist
 import awkward as ak
 # local
 from sidm.tools import histogram as h
-from sidm.tools.utilities import dR, lxy, matched, dxy, lepton_dxy_resolution, cosAlpha
+from sidm.tools.utilities import dR, lxy, matched, dxy, lepton_dxy_resolution, cosAlpha, muon_pt_resolution
 from sidm.definitions.objects import derived_objs
 # always reload local modules to pick up changes during development
 importlib.reload(h)
@@ -4278,6 +4278,34 @@ hist_defs = {
                    lambda objs, mask: lab_pt_ratio(objs, mask, "genEs_fromA")),
         ],
         evt_mask=lambda objs: ak.num(objs["genEs_fromA"]) >= 2,
+    ),
+
+    #########
+    # Thesis Siado
+    ##########
+    "muon_pt_resolution": h.Histogram(
+        [
+            h.Axis(hist.axis.Regular(100, -1.0, 1.0, name="muon_pt_resolution", label=r"$(p_{T}^{reco}-p_{T}^{gen})/p_{T}^{gen}$", ),
+                   lambda objs, mask: (matched(objs["muons"], objs["genMus"], 0.5).pt - matched(objs["muons"], objs["genMus"], 0.5).nearest(objs["genMus"]).pt) /
+                   matched(objs["muons"], objs["genMus"], 0.5).nearest(objs["genMus"]).pt,),
+        ],
+        # evt_mask=lambda objs: ak.num(objs["muons"]) >= 2,
+    ),
+    "dsaMuon_pt_resolution": h.Histogram(
+        [
+            h.Axis(hist.axis.Regular(100, -1.0, 1.0, name="dsaMuon_pt_resolution", label=r"$(p_{T}^{reco}-p_{T}^{gen})/p_{T}^{gen}$", ),
+                   lambda objs, mask: (matched(objs["dsaMuons"], objs["genMus"], 0.5).pt - matched(objs["dsaMuons"], objs["genMus"], 0.5).nearest(objs["genMus"]).pt) /
+                   matched(objs["dsaMuons"], objs["genMus"], 0.5).nearest(objs["genMus"]).pt,),
+        ],
+        # evt_mask=lambda objs: ak.num(objs["muons"]) >= 2,
+    ),
+    "muon_muon_dR": h.Histogram(
+        [
+            # dR(mu, nearest gen mu)
+            h.Axis(hist.axis.Regular(50, 0, 2*math.pi, name="muon_muon"),
+                   lambda objs, mask: dR(objs["muons"], objs["muons"]))
+        ],
+        evt_mask=lambda objs: ak.num(objs["muons"]) > 1,
     ),
     
 }
