@@ -13,7 +13,7 @@ import hist
 import awkward as ak
 # local
 from sidm.tools import histogram as h
-from sidm.tools.utilities import dR, lxy, matched, dxy, lepton_dxy_resolution, cosAlpha, muon_pt_resolution
+from sidm.tools.utilities import dR, lxy, matched, dxy, lepton_dxy_resolution, cosAlpha
 from sidm.definitions.objects import derived_objs
 # always reload local modules to pick up changes during development
 importlib.reload(h)
