@@ -4299,13 +4299,20 @@ hist_defs = {
         ],
         # evt_mask=lambda objs: ak.num(objs["muons"]) >= 2,
     ),
-    "muon_muon_dR": h.Histogram(
-        [
-            # dR(mu, nearest gen mu)
-            h.Axis(hist.axis.Regular(50, 0, 2*math.pi, name="muon_muon"),
-                   lambda objs, mask: dR(objs["muons"], objs["muons"]))
-        ],
-        evt_mask=lambda objs: ak.num(objs["muons"]) > 1,
-    ),
-    
+    # "muon_muon_dR": h.Histogram(
+    #     [
+    #         # dR(mu, nearest gen mu)
+    #         h.Axis(hist.axis.Regular(50, 0, 2*math.pi, name="muon_muon"),
+    #                lambda objs, mask: dR(objs["muons"], objs["muons"]))
+    #     ],
+    #     evt_mask=lambda objs: ak.num(objs["muons"]) > 1,
+    # ),
+    # "lj_invmass": h.Histogram(
+    #     [
+    #         h.Axis(hist.axis.Regular(100, 0, 500, name="lj_mass",
+    #                                  label=r"LJ InvMass"),
+    #                lambda objs, mask: objs["ljs"][mask, :1].sum().mass),
+    #     ],
+    #     evt_mask=lambda objs: ak.num(objs["ljs"]) > 1,
+    # ),
 }
