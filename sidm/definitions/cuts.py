@@ -260,4 +260,7 @@ evt_cut_defs = {
     "= 1 muLJs": lambda objs: (ak.num(objs["mu_ljs"]) == 1) & (ak.num(objs["egm_ljs"]) == 0),
     "= 1 egmLJs": lambda objs: (ak.num(objs["mu_ljs"]) == 0) & (ak.num(objs["egm_ljs"]) == 1),
     "all cos_alpha(dsa, dsa) > -0.9": lambda objs: ak.all(cosAlpha(objs["dsaMuons"]) > -0.9, axis=1),
+    "muljsmassD < v": lambda objs: (ak.num(objs["mu_ljs"]) > 1) & (
+        abs(objs["mu_ljs"][ak.num(objs["mu_ljs"]) > 1][:, 0].mass - objs["mu_ljs"][ak.num(objs["mu_ljs"]) > 1][:, 1].mass) < 0.1 ),
+    "ljljMass > 150": lambda objs: (ak.num(objs["ljs"]) > 1) & ( (objs["ljs"][ak.num(objs["ljs"]) > 1][:, 0] + objs["ljs"][ak.num(objs["ljs"]) > 1][:, 1]).mass > 200),
 }

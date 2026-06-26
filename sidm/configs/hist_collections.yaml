@@ -823,15 +823,39 @@ Muon_selection_bkg_base: &Muon_selection_bkg_base
   - "mu_lj_isolation"
 
 BKG_study:
-  - *gen_base
+  # - *gen_base
   - *muon_base
   - *dsaMuon_base
   - *electron_base
   - *lj_base
   - *lj_lj_base
+  - *mu_lj_base
   - "mulj_egmlj_invmass"
   # - "lj_lj_invmass_4mu"
   - "muon_pt_resolution"
   - "dsaMuon_pt_resolution"
-  # - "muon_muon_dR"
+  - "muon_muon_dR"
+  - "muon_muon_dR2"
   # - "lj_invmass"
+  - "muon_genMu_matched_dR"
+  - "ljm_invmass"
+  # - "lje_invmass"
+  - "mulj1Mass"
+  - "mulj2Mass"
+  # - "muljs_Massdiff"
+  - "lj0_mass"
+  - "lj1_mass"
+  - "lj_mass_diff"
+  - "muLJ_mass_fraction"
+  # - "lj_lj_invmassnew"
+  - "lj0_vs_lj1_mass"
+  - "muon_in_lj_pt"
+  - "muon_in_lj_mass"
+  - "ljm2_invmass"
+  - "lj00_invmass"
+  - "lj01_invmass"
+  - "lj02_invmass"
+  - "lj03_invmass"
+  - "lj12_invmass"
+  - "lj13_invmass"
+  - "lj23_invmass"
