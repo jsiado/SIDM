@@ -1773,7 +1773,7 @@ postlj_iso_disp: &postlj_iso_disp
     - "egm_lj_iso < 0.2"
     - "displaced"
 
-#### Selections ####
+#### Selections 2mu####
 bkg_base:
   obj_cuts: *obj_cuts
   postLj_obj_cuts: *postlj_base
@@ -1788,7 +1788,6 @@ bkg_base_2mu2e:
   evt_cuts:
     - *evt_baseNoLj
     - ">=2 LJs"
-    - ">=1 mu_ljs"
     - "2mu2e"
 
 bkg_base_2mu2e_iso:
@@ -1797,7 +1796,6 @@ bkg_base_2mu2e_iso:
   evt_cuts:
     - *evt_baseNoLj
     - ">=2 LJs"
-    - ">=1 mu_ljs"
     - "2mu2e"
 
 bkg_base_2mu2e_iso_disp:
@@ -1806,7 +1804,6 @@ bkg_base_2mu2e_iso_disp:
   evt_cuts:
     - *evt_baseNoLj
     - ">=2 LJs"
-    - ">=1 mu_ljs"
     - "2mu2e"
 
 bkg_base_2mu2e_iso_disp_dphi:
@@ -1815,6 +1812,39 @@ bkg_base_2mu2e_iso_disp_dphi:
   evt_cuts:
     - *evt_baseNoLj
     - ">=2 LJs"
-    - ">=1 mu_ljs"
     - "2mu2e"
+    - "LJ-LJ dPhi > 2"
+
+#### Selections 4mu ####
+bkg_base_4mu:
+  obj_cuts: *obj_cuts
+  postLj_obj_cuts: *postlj_base
+  evt_cuts:
+    - *evt_baseNoLj
+    - ">=2 LJs"
+    - "4mu"
+
+bkg_base_4mu_iso:
+  obj_cuts: *obj_cuts
+  postLj_obj_cuts: *postlj_iso
+  evt_cuts:
+    - *evt_baseNoLj
+    - ">=2 LJs"
+    - "4mu"
+
+bkg_base_4mu_iso_disp:
+  obj_cuts: *obj_cuts
+  postLj_obj_cuts: *postlj_iso_disp
+  evt_cuts:
+    - *evt_baseNoLj
+    - ">=2 LJs"
+    - "4mu"
+
+bkg_base_4mu_iso_disp_dphi:
+  obj_cuts: *obj_cuts
+  postLj_obj_cuts: *postlj_iso_disp
+  evt_cuts:
+    - *evt_baseNoLj
+    - ">=2 LJs"
+    - "4mu"
     - "LJ-LJ dPhi > 2"
