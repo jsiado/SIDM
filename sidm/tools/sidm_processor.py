@@ -141,8 +141,21 @@ class SidmProcessor(processor.ProcessorABC):
                     sel_objs[obj] = self.postLj_objs[obj](sel_objs)
 
                 # apply post-lj obj selection
-                postLj_selection = selection.JaggedSelection(cuts["postLj_obj"], self.verbose)
+                # print(cuts["postLj_obj"]) #jsc
+                postLj_selection = selection.JaggedSelection(cuts["postLj_obj"], self.verbose)               
                 sel_objs = postLj_selection.apply_obj_cuts(sel_objs)
+
+                # ####### jsc
+                # print("===== BEFORE apply_obj_cuts =====")
+                # print("mu_ljs:", ak.sum(ak.num(sel_objs["mu_ljs"])))
+                # print("egm_ljs:", ak.sum(ak.num(sel_objs["egm_ljs"])))
+                
+                # sel_objs = postLj_selection.apply_obj_cuts(sel_objs)
+                
+                # print("===== AFTER apply_obj_cuts =====")
+                # print("mu_ljs:", ak.sum(ak.num(sel_objs["mu_ljs"])))
+                # print("egm_ljs:", ak.sum(ak.num(sel_objs["egm_ljs"])))
+                # ######## jsc
  
                 # build Selection objects and apply event selection
                 sel_objs["evt_weights"] = evt_weights

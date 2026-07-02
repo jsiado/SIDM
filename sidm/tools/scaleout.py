@@ -14,6 +14,8 @@ def make_dask_client(address):
     client = Client(address)
     client.register_plugin(PipInstall(packages=dependencies, pip_options=["--upgrade", "--no-cache-dir"]))
     return client
+
+
     
 # def make_dask_client(address):
 #     """Create dask client that includes dependency installer (coffea-casa)."""
