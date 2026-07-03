@@ -4315,26 +4315,28 @@ hist_defs = {
     ],
     evt_mask=lambda objs: ak.num(objs["muons"]) > 1,
     ),
-    "lje_invmass": h.Histogram(
-        [
-            h.Axis(hist.axis.Regular(100, 0, 10, name="lj_mass", label=r"Invariant Mass LJ"),
-                   lambda objs, mask: objs["electron"][mask, :2].sum().mass),
-        ],
-        evt_mask=lambda objs: ak.num(objs["electrons"]) > 1,
-    ),
-    "mulj1Mass": h.Histogram(
+    ############# lepton jet mass #########
+    "mulj1_mass": h.Histogram(
         [
             #lead mulj mass
-            h.Axis(hist.axis.Regular(100, 0, 6, name="Lead muljMass", label=r"Invariant Mass LJ"),
+            h.Axis(hist.axis.Regular(100, 0, 10, name="Lead muljMass", label=r"Invariant Mass $\mu$LJ1"),
                    lambda objs, mask: ((objs["mu_ljs"][mask, 0]).mass)),
         ],
         evt_mask=lambda objs: (ak.num(objs["mu_ljs"]) > 0),
     ),
-    "mulj2Mass": h.Histogram(
+    "mulj2_mass": h.Histogram(
         [
             #sublead mulj mass
-            h.Axis(hist.axis.Regular(100, 0, 6, name="mulj2Mass", label=r"LJ2 Mass"),
+            h.Axis(hist.axis.Regular(100, 0, 10, name="mulj2Mass", label=r"Invariant Mass $\mu$LJ2"),
                    lambda objs, mask: ((objs["mu_ljs"][mask, 1]).mass)),
+        ],
+        evt_mask=lambda objs: (ak.num(objs["mu_ljs"]) > 1),
+    ),
+    "muljs_massdiff": h.Histogram(
+        [
+            #lead mulj mass
+            h.Axis(hist.axis.Regular(100, -10, 10, name="muljs mass diff", label=r"Mass ($\mu$LJ1-$\mu$LJ2)"),
+                   lambda objs, mask: ((objs["mu_ljs"][mask, 0] - objs["mu_ljs"][mask, 1]).mass)),
         ],
         evt_mask=lambda objs: (ak.num(objs["mu_ljs"]) > 1),
     ),
@@ -4349,7 +4351,7 @@ hist_defs = {
     "mulj_mulj_invmass": h.Histogram(
         [
             h.Axis(hist.axis.Regular(100, 0, 1200, name="ljlj_mass",
-                                     label=r"Invariant Mass ($LJ_{0}$, $LJ_{1}$)"),
+                                     label=r"Invariant Mass ($\mu$LJ_{0}, $\mu$LJ_{1})"),
                    lambda objs, mask: objs["mu_ljs"][mask, :2].sum().mass),
         ],
         evt_mask=lambda objs: (ak.num(objs["mu_ljs"]) > 1),

@@ -266,7 +266,10 @@ evt_cut_defs = {
     "muljsmassD < v": lambda objs: (ak.num(objs["mu_ljs"]) > 1) & (
         abs(objs["mu_ljs"][ak.num(objs["mu_ljs"]) > 1][:, 0].mass - objs["mu_ljs"][ak.num(objs["mu_ljs"]) > 1][:, 1].mass) < 0.1 ),
     # "ljljMass > 150": lambda objs: (ak.num(objs["ljs"]) > 1) & ( (objs["ljs"][ak.num(objs["ljs"]) > 1][:, 0] + objs["ljs"][ak.num(objs["ljs"]) > 1][:, 1]).mass > 200),
-    "ljljMass > 200": lambda objs: ((ak.num(objs["ljs"]) > 1) & (((objs["ljs"][:, 0] + objs["ljs"][:, 1]).mass) > 200)),
+    "ljljMass > 150": lambda objs: ((ak.num(objs["ljs"]) > 1) & (((objs["ljs"][:, 0] + objs["ljs"][:, 1]).mass) > 150)),
+    "ljljMass > 175": lambda objs: ((ak.num(objs["ljs"]) > 1) & (((objs["ljs"][:, 0] + objs["ljs"][:, 1]).mass) > 175)),
+    "muljljMass > 150": lambda objs: ((ak.num(objs["mu_ljs"]) > 1) & (((objs["mu_ljs"][:, 0] + objs["mu_ljs"][:, 1]).mass) > 150)),  
+    "muljljMass > 175": lambda objs: ((ak.num(objs["mu_ljs"]) > 1) & (((objs["mu_ljs"][:, 0] + objs["mu_ljs"][:, 1]).mass) > 175)),
     "muLJ-muLJ dPhi > 2": lambda objs: abs(objs["mu_ljs"][:, 0].delta_phi(objs["mu_ljs"][:, 1])) > 2.0,
     ####################
 }
