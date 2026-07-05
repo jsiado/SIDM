@@ -4336,7 +4336,7 @@ hist_defs = {
         [
             #lead mulj mass
             h.Axis(hist.axis.Regular(100, -10, 10, name="muljs mass diff", label=r"Mass ($\mu$LJ1-$\mu$LJ2)"),
-                   lambda objs, mask: ((objs["mu_ljs"][mask, 0] - objs["mu_ljs"][mask, 1]).mass)),
+                   lambda objs, mask: ((objs["mu_ljs"][mask, 0]).mass) - ((objs["mu_ljs"][mask, 1]).mass)),
         ],
         evt_mask=lambda objs: (ak.num(objs["mu_ljs"]) > 1),
     ),
@@ -4403,7 +4403,7 @@ hist_defs = {
     ),
     "lj_mass_diff": h.Histogram(
         [
-            h.Axis(hist.axis.Regular(100, -20, 20, name="lj_mass_diff", label=r"$m_(LJ_0)-m_(LJ_1)$ [GeV]"),
+            h.Axis(hist.axis.Regular(100, -20, 20, name="lj_mass_diff", label=r"$m_{LJ_0}-m_{LJ_1}$ [GeV]"),
                    lambda objs, mask: ((objs["ljs"][mask, 1].mass) - (objs["ljs"][mask, 0].mass))),
         ],
         evt_mask=lambda objs: ak.num(objs["ljs"]) > 1,

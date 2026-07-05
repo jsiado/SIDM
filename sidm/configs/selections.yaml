@@ -1781,7 +1781,7 @@ bkg_base:
     - *evt_baseNoLj
     - ">=2 LJs"
 
-bkg_base_2mulj: #### used as base
+bkg_base_2mulj: #### used as base for 4mu
   obj_cuts: *obj_cuts
   postLj_obj_cuts: *postlj_base
   evt_cuts:
@@ -1834,21 +1834,61 @@ bkg_base_2mulj_iso_disp_dphi_mass175: # base + iso + disp + dphi + mass
     - "LJ-LJ dPhi > 2"
     - "ljljMass > 175"
 
-bkg_base_2mulj_iso_disp_dphimulj: # base + iso + disp + dphi
+bkg_base_1mu1egmlj: #### used as base for 4mu
   obj_cuts: *obj_cuts
-  postLj_obj_cuts: *postlj_iso_disp
+  postLj_obj_cuts: *postlj_base
   evt_cuts:
     - *evt_baseNoLj
     - ">=2 LJs"
-    - "> 1 mu_lj"
-    - "muLJ-muLJ dPhi > 2"
+    - ">=1 egm_ljs"
+    - ">=1 mu_ljs"
 
-bkg_base_2mulj_iso_disp_dphimulj_massmulj: # base + iso + disp + dphi
+bkg_base_1mu1egmlj_iso: # base + iso
+  obj_cuts: *obj_cuts
+  postLj_obj_cuts: *postlj_iso
+  evt_cuts:
+    - *evt_baseNoLj
+    - ">=2 LJs"
+    - ">=1 egm_ljs"
+    - ">=1 mu_ljs"
+
+bkg_base_1mu1egmlj_iso_disp: # base + iso + disp
   obj_cuts: *obj_cuts
   postLj_obj_cuts: *postlj_iso_disp
   evt_cuts:
     - *evt_baseNoLj
     - ">=2 LJs"
-    - "> 1 mu_lj"
-    - "muLJ-muLJ dPhi > 2"
-    - "muljljMass > 150"
+    - ">=1 egm_ljs"
+    - ">=1 mu_ljs"
+
+bkg_base_1mu1egmlj_iso_disp_dphi: # base + iso + disp + dphi
+  obj_cuts: *obj_cuts
+  postLj_obj_cuts: *postlj_iso_disp
+  evt_cuts:
+    - *evt_baseNoLj
+    - ">=2 LJs"
+    - ">=1 egm_ljs"
+    - ">=1 mu_ljs"
+    - "LJ-LJ dPhi > 2"
+
+bkg_base_1mu1egmlj_iso_disp_dphi_mass150: # base + iso + disp + dphi + mass
+  obj_cuts: *obj_cuts
+  postLj_obj_cuts: *postlj_iso_disp
+  evt_cuts:
+    - *evt_baseNoLj
+    - ">=2 LJs"
+    - ">=1 egm_ljs"
+    - ">=1 mu_ljs"
+    - "LJ-LJ dPhi > 2"
+    - "ljljMass > 150"
+
+bkg_base_1mu1egmlj_iso_disp_dphi_mass175: # base + iso + disp + dphi + mass
+  obj_cuts: *obj_cuts
+  postLj_obj_cuts: *postlj_iso_disp
+  evt_cuts:
+    - *evt_baseNoLj
+    - ">=2 LJs"
+    - ">=1 egm_ljs"
+    - ">=1 mu_ljs"
+    - "LJ-LJ dPhi > 2"
+    - "ljljMass > 175"
