@@ -4316,30 +4316,88 @@ hist_defs = {
     evt_mask=lambda objs: ak.num(objs["muons"]) > 1,
     ),
     ############# lepton jet mass #########
-    "mulj1_mass": h.Histogram(
+    "lj0_mass": h.Histogram(
+        [
+            h.Axis(hist.axis.Regular(100, 0, 10, name="lj0_mass",
+                                     label="Leading lepton jet Mass [GeV]"),
+                   lambda objs, mask: objs["ljs"][mask, 0].mass),
+        ],
+        evt_mask=lambda objs: ak.num(objs["ljs"]) > 0,
+    ),
+    "lj1_mass": h.Histogram(
+        [
+            h.Axis(hist.axis.Regular(100, 0, 10, name="lj1_mass", label="Subleading lepton jet Mass [GeV]"),
+                   lambda objs, mask: (objs["ljs"][mask, 1].mass)),
+        ],
+        evt_mask=lambda objs: ak.num(objs["ljs"]) > 1,
+    ),
+    "mulj0_mass": h.Histogram(
         [
             #lead mulj mass
-            h.Axis(hist.axis.Regular(100, 0, 10, name="Lead muljMass", label=r"Invariant Mass $\mu$LJ1"),
+            h.Axis(hist.axis.Regular(100, -5, 15, name="Lead muljMass", label=r"Invariant Mass $\mu$LJ1"),
                    lambda objs, mask: ((objs["mu_ljs"][mask, 0]).mass)),
         ],
         evt_mask=lambda objs: (ak.num(objs["mu_ljs"]) > 0),
     ),
-    "mulj2_mass": h.Histogram(
+    "mulj1_mass": h.Histogram(
         [
             #sublead mulj mass
-            h.Axis(hist.axis.Regular(100, 0, 10, name="mulj2Mass", label=r"Invariant Mass $\mu$LJ2"),
+            h.Axis(hist.axis.Regular(100, -5, 15, name="mulj2Mass", label=r"Invariant Mass $\mu$LJ2"),
                    lambda objs, mask: ((objs["mu_ljs"][mask, 1]).mass)),
         ],
         evt_mask=lambda objs: (ak.num(objs["mu_ljs"]) > 1),
     ),
-    "muljs_massdiff": h.Histogram(
+    "lj01_massdiff": h.Histogram(
         [
-            #lead mulj mass
-            h.Axis(hist.axis.Regular(100, -10, 10, name="muljs mass diff", label=r"Mass ($\mu$LJ1-$\mu$LJ2)"),
-                   lambda objs, mask: ((objs["mu_ljs"][mask, 0]).mass) - ((objs["mu_ljs"][mask, 1]).mass)),
+            h.Axis(hist.axis.Regular(100, -10, 10, name="lj01_massdiff", label=r"$m(\mathrm{LJ}_0)-m(\mathrm{LJ}_1)$ [GeV]"),
+                   lambda objs, mask: (objs["ljs"][mask, 0].mass - objs["ljs"][mask, 1].mass)),
         ],
-        evt_mask=lambda objs: (ak.num(objs["mu_ljs"]) > 1),
+        evt_mask=lambda objs: ak.num(objs["ljs"]) > 1,
     ),
+    "mulj01_massdiff": h.Histogram(
+        [
+            h.Axis(hist.axis.Regular(100, -10, 10, name="mulj01_massdiff", label=r"$m(\mathrm{LJ}_0)-m(\mathrm{LJ}_1)$ [GeV]"),
+                   lambda objs, mask: (objs["mu_ljs"][mask, 0].mass - objs["mu_ljs"][mask, 1].mass)),
+        ],
+        evt_mask=lambda objs: ak.num(objs["mu_ljs"]) > 1,
+    ),
+    #######################################3
+    ######################################
+    # "muljs_massdiff": h.Histogram(
+    #     [
+    #         #lead mulj mass
+    #         h.Axis(hist.axis.Regular(100, -10, 10, name="muljs mass diff", label=r"Mass ($\mu$LJ1-$\mu$LJ2)"),
+    #                lambda objs, mask: ((objs["mu_ljs"][mask, 0]).mass) - ((objs["mu_ljs"][mask, 1]).mass)),
+    #     ],
+    #     evt_mask=lambda objs: (ak.num(objs["mu_ljs"]) > 1),
+    # ),
+    # "mulj_invmass": h.Histogram(
+    #     [
+    #         h.Axis(hist.axis.Regular(100, -5, 15, name="mulj_mass",
+    #                                  label=r"Invariant Mass $\mu LJ$"),
+    #                lambda objs, mask: (objs["mu_ljs"][mask, 0]).mass),
+    #     ],
+    #     evt_mask=lambda objs: (ak.num(objs["mu_ljs"]) > 0) & (ak.num(objs["egm_ljs"]) > 0),
+    # ),
+    # "egmlj_invmass": h.Histogram(
+    #     [
+    #         h.Axis(hist.axis.Regular(100, -5, 15, name="egmlj_mass",
+    #                                  label=r"Invariant Mass $egmLJ$"),
+    #                lambda objs, mask: ((objs["egm_ljs"][mask, 0]).mass)),
+    #     ],
+    #     evt_mask=lambda objs: (ak.num(objs["mu_ljs"]) > 0) & (ak.num(objs["egm_ljs"]) > 0),
+    # ),
+    # "muegmljs_massdiff": h.Histogram(
+    #     [
+    #         h.Axis(hist.axis.Regular(100, -10, 10, name="muegmljs_massdiff",
+    #                                  label=r"Mass Diff (egmlj - mulj)"),
+    #                lambda objs, mask: ((objs["egm_ljs"][mask, 0]).mass) - ((objs["mu_ljs"][mask, 0]).mass) ),
+    #     ],
+    #     evt_mask=lambda objs: (ak.num(objs["mu_ljs"]) > 0) & (ak.num(objs["egm_ljs"]) > 0),
+    # ),
+    ##################
+    #############
+    ###############
     # "mulj_egmlj_invmass": h.Histogram(
     #     [
     #         h.Axis(hist.axis.Regular(100, 0, 1200, name="ljlj_mass",
@@ -4348,14 +4406,14 @@ hist_defs = {
     #     ],
     #     evt_mask=lambda objs: (ak.num(objs["mu_ljs"]) > 0) & (ak.num(objs["egm_ljs"]) > 0),
     # ),
-    "mulj_mulj_invmass": h.Histogram(
-        [
-            h.Axis(hist.axis.Regular(100, 0, 1200, name="ljlj_mass",
-                                     label=r"Invariant Mass ($\mu$LJ_{0}, $\mu$LJ_{1})"),
-                   lambda objs, mask: objs["mu_ljs"][mask, :2].sum().mass),
-        ],
-        evt_mask=lambda objs: (ak.num(objs["mu_ljs"]) > 1),
-    ),
+    # "mulj_mulj_invmass": h.Histogram(
+    #     [
+    #         h.Axis(hist.axis.Regular(100, 0, 1200, name="ljlj_mass",
+    #                                  label=r"Invariant Mass ($\mu$LJ_{0}, $\mu$LJ_{1})"),
+    #                lambda objs, mask: objs["mu_ljs"][mask, :2].sum().mass),
+    #     ],
+    #     evt_mask=lambda objs: (ak.num(objs["mu_ljs"]) > 1),
+    # ),
     # "muljs_Massdiff": h.Histogram(
     #     [
     #         #muljs mass difference
@@ -4372,60 +4430,46 @@ hist_defs = {
     #     ],
     #     evt_mask=lambda objs: (ak.num(objs["mu_ljs"]) > 0) & (ak.num(objs["egm_ljs"]) > 0),
     # ),
-    "ljm_invmass": h.Histogram(
-        [
-            h.Axis(hist.axis.Regular(100, 0, 10, name="lj_mass", label=r"Invariant Mass LJ)"),
-                   lambda objs, mask: objs["muons"][mask, :2].sum().mass),
-        ],
-        evt_mask=lambda objs: ak.num(objs["muons"]) > 1,
-    ),
-    "ljm2_invmass": h.Histogram(
-        [
-            h.Axis(hist.axis.Regular(100, 0, 10, name="ljm2_invmass", label=r"Invariant Mass LJ)"),
-                   lambda objs, mask: objs["muons"][mask, 2:4].sum().mass),
-        ],
-        evt_mask=lambda objs: ak.num(objs["muons"]) > 3,
-    ),
-    "lj0_mass": h.Histogram(
-        [
-            h.Axis(hist.axis.Regular(100, 0, 10, name="lj0_mass",
-                                     label="Leading lepton jet Mass [GeV]"),
-                   lambda objs, mask: objs["ljs"][mask, 0].mass),
-        ],
-        evt_mask=lambda objs: ak.num(objs["ljs"]) > 0,
-    ),
-    "lj1_mass": h.Histogram(
-        [
-            h.Axis(hist.axis.Regular(100, 0, 10, name="lj1_mass", label="Subleading lepton jet Mass [GeV]"),
-                   lambda objs, mask: (objs["ljs"][mask, 1].mass)),
-        ],
-        evt_mask=lambda objs: ak.num(objs["ljs"]) > 1,
-    ),
-    "lj_mass_diff": h.Histogram(
-        [
-            h.Axis(hist.axis.Regular(100, -20, 20, name="lj_mass_diff", label=r"$m_{LJ_0}-m_{LJ_1}$ [GeV]"),
-                   lambda objs, mask: ((objs["ljs"][mask, 1].mass) - (objs["ljs"][mask, 0].mass))),
-        ],
-        evt_mask=lambda objs: ak.num(objs["ljs"]) > 1,
-    ),
-    "muLJ_mass_fraction": h.Histogram(
-        [
-            h.Axis(hist.axis.Regular(100, 0, 1, name="muLJ_mass_balance",
-                label=r"$|m_{LJ_0}-m_{LJ_1}|/(m_{LJ_0}+m_{LJ_1})$"),
-            lambda objs, mask: 
-               abs(objs["mu_ljs"][mask, 0].mass - objs["mu_ljs"][mask, 1].mass) /
-                ( objs["mu_ljs"][mask, 0].mass + objs["mu_ljs"][mask, 1].mass ),),
-        ],
-        evt_mask=lambda objs: ak.num(objs["mu_ljs"]) > 1,
-    ),
-    "lj0_vs_lj1_mass": h.Histogram(
-        [
-            h.Axis(hist.axis.Regular(100, 0, 10, name="lj0_mass", label=r"Leading lepton jet mass [GeV]"),
-                lambda objs, mask: objs["ljs"][mask, 0].mass ),
+    # "ljm_invmass": h.Histogram(
+    #     [
+    #         h.Axis(hist.axis.Regular(100, 0, 10, name="lj_mass", label=r"Invariant Mass LJ)"),
+    #                lambda objs, mask: objs["muons"][mask, :2].sum().mass),
+    #     ],
+    #     evt_mask=lambda objs: ak.num(objs["muons"]) > 1,
+    # ),
+    # "ljm2_invmass": h.Histogram(
+    #     [
+    #         h.Axis(hist.axis.Regular(100, 0, 10, name="ljm2_invmass", label=r"Invariant Mass LJ)"),
+    #                lambda objs, mask: objs["muons"][mask, 2:4].sum().mass),
+    #     ],
+    #     evt_mask=lambda objs: ak.num(objs["muons"]) > 3,
+    # ),
+    
+    # "lj_mass_diff": h.Histogram(
+    #     [
+    #         h.Axis(hist.axis.Regular(100, -20, 20, name="lj_mass_diff", label=r"$m_{LJ_0}-m_{LJ_1}$ [GeV]"),
+    #                lambda objs, mask: ((objs["ljs"][mask, 1].mass) - (objs["ljs"][mask, 0].mass))),
+    #     ],
+    #     evt_mask=lambda objs: ak.num(objs["ljs"]) > 1,
+    # ),
+    # "muLJ_mass_fraction": h.Histogram(
+    #     [
+    #         h.Axis(hist.axis.Regular(100, 0, 1, name="muLJ_mass_balance",
+    #             label=r"$|m_{LJ_0}-m_{LJ_1}|/(m_{LJ_0}+m_{LJ_1})$"),
+    #         lambda objs, mask: 
+    #            abs(objs["mu_ljs"][mask, 0].mass - objs["mu_ljs"][mask, 1].mass) /
+    #             ( objs["mu_ljs"][mask, 0].mass + objs["mu_ljs"][mask, 1].mass ),),
+    #     ],
+    #     evt_mask=lambda objs: ak.num(objs["mu_ljs"]) > 1,
+    # ),
+    # "lj0_vs_lj1_mass": h.Histogram(
+    #     [
+    #         h.Axis(hist.axis.Regular(100, 0, 10, name="lj0_mass", label=r"Leading lepton jet mass [GeV]"),
+    #             lambda objs, mask: objs["ljs"][mask, 0].mass ),
             
-            h.Axis(hist.axis.Regular(100, 0, 10, name="lj1_mass", label=r"Subleading lepton jet mass [GeV]"),
-                lambda objs, mask: objs["ljs"][mask, 1].mass),
-        ],
-        evt_mask=lambda objs: ak.num(objs["ljs"]) > 1,
-    ), 
+    #         h.Axis(hist.axis.Regular(100, 0, 10, name="lj1_mass", label=r"Subleading lepton jet mass [GeV]"),
+    #             lambda objs, mask: objs["ljs"][mask, 1].mass),
+    #     ],
+    #     evt_mask=lambda objs: ak.num(objs["ljs"]) > 1,
+    # ),
 }

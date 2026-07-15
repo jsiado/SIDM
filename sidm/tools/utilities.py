@@ -286,12 +286,19 @@ def lab_ctau(bs, zd, proper_ct, grid_cfg=f"{BASE_DIR}/configs/signal_grid.yaml")
         lab_ct = proper_ct*grid[bs][zd]["labframe_factor"]
     return round_sigfig(lab_ct, digits=2)
 
-def get_xs(dataset, cfg="cross_sections.yaml"):
+def get_xs(dataset, cfg="cross_sections.yaml", use_signal_xs=True):
     """Fetch dataset xs from cfg"""
     # assume location_cfg is stored in sidm/configs/
     xs_menu = load_yaml(f"{BASE_DIR}/configs/" + cfg)
     try:
-        return xs_menu[dataset]
+        if dataset.startswith(("2Mu2E", "4Mu")):
+            if use_signal_xs:
+                return xs_menu[dataset]
+            else:
+                print("Ignoring signal cross sections, assuming 1 fb")
+                return 0.001
+        else:
+            return xs_menu[dataset]
     except KeyError:
         if dataset.startswith(("2Mu2E", "4Mu")):
             print("Signal not in xs cfg, assuming 1fb")

@@ -834,20 +834,39 @@ BKG_study:
   - "dsaMuon_pt_resolution"
   - "muon_muon_dR"
   - "muon_muon_dR2"
-  - "mulj1_mass"
-  - "mulj2_mass"
-  - "muljs_massdiff"
-  - "mulj_egmlj_invmass"
-  - "mulj_mulj_invmass"
-  ########
-  - "muon_genMu_matched_dR"
-  - "ljm_invmass"
-  # - "muljs_Massdiff"
+  # lj masses
   - "lj0_mass"
   - "lj1_mass"
-  - "lj_mass_diff"
-  - "muLJ_mass_fraction"
+  - "lj01_massdiff"
+  - "mulj0_mass"
+  - "mulj1_mass"
+  - "mulj01_massdiff"
+  # - "muljs_massdiff"
+  # - "mulj_egmlj_invmass"
+  # - "mulj_mulj_invmass"
+  # - "mulj_invmass"
+  # - "egmlj_invmass"
+  # - "muegmljs_massdiff"
+  # - "pf_mulj_egmlj_invmass"
+  ########
+  # - "muon_genMu_matched_dR"
+  # - "ljm_invmass"
+  # - "muljs_Massdiff"
+  # - "lj_mass_diff"
+  # - "muLJ_mass_fraction"
   # - "lj_lj_invmassnew"
-  - "lj0_vs_lj1_mass"
+  # - "lj0_vs_lj1_mass"
   # - "muon_in_lj_pt"
   # - "muon_in_lj_mass"
+
+thesis:
+  - *gen_base
+  - *muon_base
+  - *dsaMuon_base
+  - *electron_base
+  - *photon_base
+  - *lj_base
+  - *lj_lj_base
+  - *mu_lj_base
+  - *egm_lj_base
+  - *genBS_genA_kinematics

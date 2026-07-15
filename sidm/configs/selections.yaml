@@ -1781,6 +1781,14 @@ bkg_base:
     - *evt_baseNoLj
     - ">=2 LJs"
 
+bkg_base_mljd:
+  obj_cuts: *obj_cuts
+  postLj_obj_cuts: *postlj_base
+  evt_cuts:
+    - *evt_baseNoLj
+    - ">=2 LJs"
+    - "abs(lj01 massdiff) < 0.2"
+
 bkg_base_2mulj: #### used as base for 4mu
   obj_cuts: *obj_cuts
   postLj_obj_cuts: *postlj_base
@@ -1814,7 +1822,7 @@ bkg_base_2mulj_iso_disp_dphi: # base + iso + disp + dphi
     - "> 1 mu_lj"
     - "LJ-LJ dPhi > 2"
 
-bkg_base_2mulj_iso_disp_dphi_mass150: # base + iso + disp + dphi + mass
+bkg_base_2mulj_iso_disp_dphi_mass150: # base + iso + disp + dphi + mass150
   obj_cuts: *obj_cuts
   postLj_obj_cuts: *postlj_iso_disp
   evt_cuts:
@@ -1824,7 +1832,7 @@ bkg_base_2mulj_iso_disp_dphi_mass150: # base + iso + disp + dphi + mass
     - "LJ-LJ dPhi > 2"
     - "ljljMass > 150"
 
-bkg_base_2mulj_iso_disp_dphi_mass175: # base + iso + disp + dphi + mass
+bkg_base_2mulj_iso_disp_dphi_mass175: # base + iso + disp + dphi + mass175
   obj_cuts: *obj_cuts
   postLj_obj_cuts: *postlj_iso_disp
   evt_cuts:
@@ -1834,7 +1842,7 @@ bkg_base_2mulj_iso_disp_dphi_mass175: # base + iso + disp + dphi + mass
     - "LJ-LJ dPhi > 2"
     - "ljljMass > 175"
 
-bkg_base_1mu1egmlj: #### used as base for 4mu
+bkg_base_1mu1egmlj: #### used as base for 2mu
   obj_cuts: *obj_cuts
   postLj_obj_cuts: *postlj_base
   evt_cuts:
@@ -1871,7 +1879,7 @@ bkg_base_1mu1egmlj_iso_disp_dphi: # base + iso + disp + dphi
     - ">=1 mu_ljs"
     - "LJ-LJ dPhi > 2"
 
-bkg_base_1mu1egmlj_iso_disp_dphi_mass150: # base + iso + disp + dphi + mass
+bkg_base_1mu1egmlj_iso_disp_dphi_mass150: # base + iso + disp + dphi + mass150
   obj_cuts: *obj_cuts
   postLj_obj_cuts: *postlj_iso_disp
   evt_cuts:
@@ -1882,7 +1890,7 @@ bkg_base_1mu1egmlj_iso_disp_dphi_mass150: # base + iso + disp + dphi + mass
     - "LJ-LJ dPhi > 2"
     - "ljljMass > 150"
 
-bkg_base_1mu1egmlj_iso_disp_dphi_mass175: # base + iso + disp + dphi + mass
+bkg_base_1mu1egmlj_iso_disp_dphi_mass175: # base + iso + disp + dphi + mass175
   obj_cuts: *obj_cuts
   postLj_obj_cuts: *postlj_iso_disp
   evt_cuts:
@@ -1892,3 +1900,14 @@ bkg_base_1mu1egmlj_iso_disp_dphi_mass175: # base + iso + disp + dphi + mass
     - ">=1 mu_ljs"
     - "LJ-LJ dPhi > 2"
     - "ljljMass > 175"
+
+the_reco_obj:
+  obj_cuts:
+    <<: *obj_ljsource_cuts
+  postLj_obj_cuts:
+    ljs:
+      - "pT > 30 GeV"
+      - "|eta| < 2.4"
+  # evt_cuts:
+    # - *evt_baseNoLj
+    # - "pass flags"
