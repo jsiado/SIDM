@@ -835,6 +835,7 @@ BKG_study:
   - "muon_muon_dR"
   - "muon_muon_dR2"
   # lj masses
+  - "lj_mass"
   - "lj0_mass"
   - "lj1_mass"
   - "lj01_massdiff"

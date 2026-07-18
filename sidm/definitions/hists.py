@@ -4316,11 +4316,19 @@ hist_defs = {
     evt_mask=lambda objs: ak.num(objs["muons"]) > 1,
     ),
     ############# lepton jet mass #########
+    "lj_mass": h.Histogram(
+        [
+            h.Axis(hist.axis.Regular(100, 0, 10, name="lj_mass",
+                                     label="lepton jet Mass [GeV]"),
+                   lambda objs, mask: objs["ljs"][mask, :].mass),
+        ],
+        evt_mask=lambda objs: ak.num(objs["ljs"]) > 0,
+    ),
     "lj0_mass": h.Histogram(
         [
             h.Axis(hist.axis.Regular(100, 0, 10, name="lj0_mass",
                                      label="Leading lepton jet Mass [GeV]"),
-                   lambda objs, mask: objs["ljs"][mask, 0].mass),
+                   lambda objs, mask: objs["ljs"][mask].mass),
         ],
         evt_mask=lambda objs: ak.num(objs["ljs"]) > 0,
     ),
