@@ -865,7 +865,7 @@ thesis:
   - *dsaMuon_base
   - *electron_base
   - *photon_base
-  - *lj_base
+  # - *lj_base
   - *lj_lj_base
   - *mu_lj_base
   - *egm_lj_base

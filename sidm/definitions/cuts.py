@@ -260,17 +260,17 @@ evt_cut_defs = {
     "= 1 muLJs": lambda objs: (ak.num(objs["mu_ljs"]) == 1) & (ak.num(objs["egm_ljs"]) == 0),
     "= 1 egmLJs": lambda objs: (ak.num(objs["mu_ljs"]) == 0) & (ak.num(objs["egm_ljs"]) == 1),
     "all cos_alpha(dsa, dsa) > -0.9": lambda objs: ak.all(cosAlpha(objs["dsaMuons"]) > -0.9, axis=1),
-    ###########################
-    "> 1 mu_lj": lambda objs: (ak.num(objs["mu_ljs"]) > 1),
-    # ">=2 mu_ljs": lambda objs: ak.num(objs["mu_ljs"]) >= 1,
-    "muljsmassD < v": lambda objs: (ak.num(objs["mu_ljs"]) > 1) & (
-        abs(objs["mu_ljs"][ak.num(objs["mu_ljs"]) > 1][:, 0].mass - objs["mu_ljs"][ak.num(objs["mu_ljs"]) > 1][:, 1].mass) < 0.1 ),
-    # "ljljMass > 150": lambda objs: (ak.num(objs["ljs"]) > 1) & ( (objs["ljs"][ak.num(objs["ljs"]) > 1][:, 0] + objs["ljs"][ak.num(objs["ljs"]) > 1][:, 1]).mass > 200),
+    ########################### JS's cut
     "ljljMass > 150": lambda objs: ((ak.num(objs["ljs"]) > 1) & (((objs["ljs"][:, 0] + objs["ljs"][:, 1]).mass) > 150)),
     "ljljMass > 175": lambda objs: ((ak.num(objs["ljs"]) > 1) & (((objs["ljs"][:, 0] + objs["ljs"][:, 1]).mass) > 175)),
+    "ljmass > 0.3": lambda objs: ( (ak.num(objs["ljs"]) > 1)    &   ((objs["ljs"][:, 0].mass) > 0.3)  &  ((objs["ljs"][:, 1].mass) > 0.3)),
+    "ljmass > 0.5": lambda objs: ( (ak.num(objs["ljs"]) > 1)    &   ((objs["ljs"][:, 0].mass) > 0.5)  &  ((objs["ljs"][:, 1].mass) > 0.5)),
+    "abs(lj01 massdiff) < 1.0": lambda objs: ( (ak.num(objs["ljs"]) > 1) & (abs(objs["ljs"][:, 0].mass - objs["ljs"][:, 1].mass) < 1.0) ),
+    # mulj event cuts
+    "> 1 mu_lj": lambda objs: (ak.num(objs["mu_ljs"]) > 1),
     "muljljMass > 150": lambda objs: ((ak.num(objs["mu_ljs"]) > 1) & (((objs["mu_ljs"][:, 0] + objs["mu_ljs"][:, 1]).mass) > 150)),  
     "muljljMass > 175": lambda objs: ((ak.num(objs["mu_ljs"]) > 1) & (((objs["mu_ljs"][:, 0] + objs["mu_ljs"][:, 1]).mass) > 175)),
     "muLJ-muLJ dPhi > 2": lambda objs: abs(objs["mu_ljs"][:, 0].delta_phi(objs["mu_ljs"][:, 1])) > 2.0,
-    "abs(lj01 massdiff) < 0.2": lambda objs: ( (ak.num(objs["ljs"]) > 1) & (abs(objs["ljs"][:, 0].mass - objs["ljs"][:, 1].mass) < 0.2) ),
+    "abs(mulj01 massdiff) < 0.2": lambda objs: ( (ak.num(objs["mu_ljs"]) > 1) & (abs(objs["mu_ljs"][:, 0].mass - objs["ljs"][:, 1].mass) < 0.2) ),
     ####################
 }
