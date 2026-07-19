@@ -1875,7 +1875,6 @@ bkg_base_2mulj_iso_disp_dphi_ljmp3: # base + iso + disp + dphi
     - *evt_baseNoLj
     - ">=2 LJs"
     - "> 1 mu_lj"
-    # - "muLJ-muLJ dPhi > 2"
     - "LJ-LJ dPhi > 2"
     - "ljmass > 0.3"
 
@@ -1913,3 +1912,14 @@ bkg_base_2mulj_iso_disp_dphi_ljmp3_mass175: # base + iso + disp + dphi
     - "LJ-LJ dPhi > 2"
     - "ljmass > 0.3"
     - "ljljMass > 175"
+
+bkg_base_2mulj_iso_disp_dphi_ljmp3_mass150: # base + iso + disp + dphi
+  obj_cuts: *obj_cuts
+  postLj_obj_cuts: *postlj_iso_disp
+  evt_cuts:
+    - *evt_baseNoLj
+    - ">=2 LJs"
+    - "> 1 mu_lj"
+    - "LJ-LJ dPhi > 2"
+    - "ljmass > 0.3"
+    - "ljljMass > 150"
