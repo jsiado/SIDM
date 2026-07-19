@@ -4357,7 +4357,7 @@ hist_defs = {
     ),
     "lj01_massdiff": h.Histogram(
         [
-            h.Axis(hist.axis.Regular(100, -10, 10, name="lj01_massdiff", label=r"$m(\mathrm{LJ}_0)-m(\mathrm{LJ}_1)$ [GeV]"),
+            h.Axis(hist.axis.Regular(100, -10, 10, name="lj01_massdiff", label=r"$m_{\mathrm{LJ}_0}-m_{\mathrm{LJ}_1}$ [GeV]"),
                    lambda objs, mask: (objs["ljs"][mask, 0].mass - objs["ljs"][mask, 1].mass)),
         ],
         evt_mask=lambda objs: ak.num(objs["ljs"]) > 1,
