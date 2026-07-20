@@ -263,8 +263,11 @@ evt_cut_defs = {
     ########################### JS's cut
     "ljljMass > 150": lambda objs: ((ak.num(objs["ljs"]) > 1) & (((objs["ljs"][:, 0] + objs["ljs"][:, 1]).mass) > 150)),
     "ljljMass > 175": lambda objs: ((ak.num(objs["ljs"]) > 1) & (((objs["ljs"][:, 0] + objs["ljs"][:, 1]).mass) > 175)),
-    "ljmass > 0.3": lambda objs: ( (ak.num(objs["ljs"]) > 1)    &   ((objs["ljs"][:, 0].mass) > 0.3)  &  ((objs["ljs"][:, 1].mass) > 0.3)),
-    "ljmass > 0.5": lambda objs: ( (ak.num(objs["ljs"]) > 1)    &   ((objs["ljs"][:, 0].mass) > 0.5)  &  ((objs["ljs"][:, 1].mass) > 0.5)),
+    "ljmass > 0.10": lambda objs: ( (ak.num(objs["ljs"]) > 1)    &   ((objs["ljs"][:, 0].mass) > 0.10)  &  ((objs["ljs"][:, 1].mass) > 0.10)),
+    "ljmass > 0.15": lambda objs: ( (ak.num(objs["ljs"]) > 1)    &   ((objs["ljs"][:, 0].mass) > 0.15)  &  ((objs["ljs"][:, 1].mass) > 0.15)),
+    "ljmass > 0.20": lambda objs: ( (ak.num(objs["ljs"]) > 1)    &   ((objs["ljs"][:, 0].mass) > 0.20)  &  ((objs["ljs"][:, 1].mass) > 0.20)),
+    "ljmass > 0.30": lambda objs: ( (ak.num(objs["ljs"]) > 1)    &   ((objs["ljs"][:, 0].mass) > 0.30)  &  ((objs["ljs"][:, 1].mass) > 0.30)),
+    "ljmass > 0.50": lambda objs: ( (ak.num(objs["ljs"]) > 1)    &   ((objs["ljs"][:, 0].mass) > 0.50)  &  ((objs["ljs"][:, 1].mass) > 0.50)),
     "abs(lj01 massdiff) < 1.0": lambda objs: ( (ak.num(objs["ljs"]) > 1) & (abs(objs["ljs"][:, 0].mass - objs["ljs"][:, 1].mass) < 1.0) ),
     # mulj event cuts
     "> 1 mu_lj": lambda objs: (ak.num(objs["mu_ljs"]) > 1),
