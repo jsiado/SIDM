@@ -1864,3 +1864,14 @@ bkg_2mulj_iso_disp_dphi_ljmp10_mass150: # base + iso + disp + dphi
     - "LJ-LJ dPhi > 2"
     - "ljmass > 0.10"
     - "ljljMass > 150"
+
+### one selection at a time for 39
+bkg_2mulj_iso_disp_dphi_ljmdiff1: # iso + disp + dphi + dphi + mlj-mlj < 1
+  obj_cuts: *obj_cuts
+  postLj_obj_cuts: *postlj_iso_disp
+  evt_cuts:
+    - *evt_baseNoLj
+    - ">=2 LJs"
+    - "> 1 mu_lj"
+    - "LJ-LJ dPhi > 2"
+    - "abs(lj01 massdiff) < 1.0"
