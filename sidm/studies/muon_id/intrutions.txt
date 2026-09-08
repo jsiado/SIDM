@@ -1,0 +1,271 @@
+########################################
+########  For BKG limits  ##############
+########################################
+kinit jsiado@FNAL.GOV
+ssh -xY jsiado@cmslpc-el9.fnal.gov
+cd nobackup/comb/CMSSW_14_1_0_pre4/src/
+source /cvmfs/cms.cern.ch/cmsset_default.sh
+cmsenv
+cd finsidm/
+python3 run_combine.py tmu_500_5_300 30 2 5 4 (channel_signal signal_yield ttj_yield dyj_yield qcd_yield )
+
+
+
+########################################
+########  for dask run    ##############
+########################################
+git status
+git add sidm/configs/selections.yaml
+git commit -m "modified slections for 31a"
+git push
+jsiado
+pass
+
+
+modify the datacard and run with
+create a datacard witht the right backgrounds 
+copy this datacard for each signal point, the backgrounds will be the same
+run
+$combine -M AsymptoticLimits tmu_235.txt -n 235
+for each datacard. follow the convention xxx for mxx, mzd, and lxy. 
+
+Copy files locally and run combine.ipynb to produce the plot
+
+
+================================================================================
+          CMS COMBINE ANALYSIS SUMMARY & WORKFLOW GUIDE (FNAL LPC)
+================================================================================
+
+This document summarizes the complete step-by-step workflow for setting up the
+CMS Combine tool on the Fermilab LPC cluster, running a counting analysis on 
+multiple signal samples, transferring files locally, and inspecting them.
+
+--------------------------------------------------------------------------------
+1. CONNECTING & INITIALIZING THE ENVIRONMENT (ON FNAL LPC)
+--------------------------------------------------------------------------------
+Log into the Fermilab interactive node cluster. If you face remote host key
+identification warnings due to the FNAL load balancer, clear your local 
+known_hosts file using your local terminal:
+\$ ssh-keygen -f '~/.ssh/known_hosts' -R 'cmslpc-el9.fnal.gov'
+
+Once logged into your LPC bash terminal, set up the environment variables 
+and obtain your CMS grid proxy:
+\$ source /cvmfs/cms.cern.ch/cmsset_default.sh
+\(export SCRAM_ARCH=el9_amd64_gcc12\) voms-proxy-init -voms cms
+
+*Note on PEM Passphrase:* When prompted for the "Enter PEM pass phrase", type 
+the secret password you created when downloading your private grid certificate 
+(userkey.pem). No characters or stars will display on the screen while typing.
+
+--------------------------------------------------------------------------------
+2. DOWNLOADING AND COMPILING CMS COMBINE
+--------------------------------------------------------------------------------
+Navigate inside your personal nobackup directory, build your CMSSW sandbox 
+area, move into the "src" directory, and clone the Combine software framework:
+
+\$ cd ~/nobackup/
+\(cmsrel CMSSW_14_1_0_pre4\) cd CMSSW_14_1_0_pre4/src
+\(cmsenv\) git clone https://github.com HiggsAnalysis/CombinedLimit
+\(cd HiggsAnalysis/CombinedLimit\) git fetch origin
+\(git checkout v10.6.0\) scram b -j8
+
+--------------------------------------------------------------------------------
+3. CREATING MULTI-BACKGROUND DATACARDS FOR EXPECTED LIMITS
+--------------------------------------------------------------------------------
+Combine calculates limits for ONE signal model at a time. For multiple signal
+samples (e.g., different masses), create dedicated sub-folders and separate text 
+datacards (e.g., inside a directory named "finsidm").
+
+Edit a card (such as "datacard_sample1.txt") using a terminal text editor like 
+Nano (\$ nano datacard_sample1.txt). A pure counting experiment structure looks 
+like this:
+
+--- TEMPLATE START ---
+imax 1  number of channels (bins)
+jmax 3  number of backgrounds (ttbar, DY, qcd)
+kmax 4  number of systematic uncertainties
+------------
+# Expected Limit: Set observation to the exact sum of your expected backgrounds!
+bin bin1
+observation 57.0
+------------
+bin          bin1          bin1       bin1       bin1
+process      sig_sample1   ttbar      DY         qcd
+process      0             1          2          3
+rate         5.5           30.0       12.0       15.0
+------------
+lumi    lnN  1.02          -          -          -
+tt_sys  lnN  -             1.10       -          -
+dy_sys  lnN  -             -          1.05       -
+qcd_sys lnN  -             -          -          1.20
+--- TEMPLATE END ---
+
+*Crucial Settings:*
+- The "process 0" column is reserved for your unique signal parameters.
+- For expected limits, set your "observation" line value to match the exact 
+  mathematical sum of all background processes (e.g., 30.0 + 12.0 + 15.0 = 57.0).
+
+--------------------------------------------------------------------------------
+4. RUNNING COMBINE ON THE LPC
+--------------------------------------------------------------------------------
+Execute the main Combine engine using the fast asymptotic method. Include the
+"--run expected" flag to safely ignore data observations and calculate pure 
+simulation limits:
+
+\$ combine -M AsymptoticLimits datacard_sample1.txt --run expected
+
+*Note on RooFit Messages:* It is safe to ignore errors mentioning "top-level 
+p.d.f evaluates to zero" or "function value is NAN". These appear when the 
+likelihood engine probes extreme ranges during calculation, but it recovers 
+automatically as long as your final limits block prints at the bottom.
+
+The output will automatically generate a localized binary matrix data file named 
+"higgsCombineTest.AsymptoticLimits.mH120.root". Rename your resulting root files 
+systematically if managing multiple mass scans.
+
+--------------------------------------------------------------------------------
+5. DOWNLOADING FILES LOCALLY AND SECURING PERMISSIONS
+--------------------------------------------------------------------------------
+To pull the data files to your local workstation for custom Python analysis, 
+execute "scp" from your LOCAL machine terminal. Use absolute server path 
+definitions instead of tilde paths to bypass system link errors:
+
+\$ scp jsiado@cmslpc-el9.fnal.gov:/uscms/home/jsiado/nobackup/CMSSW_14_1_0_pre4/src/HiggsAnalysis/CombinedLimit/finsidm/higgsCombineTest.AsymptoticLimits.mH120.root ./output/
+
+*Permission Errors:* If you encounter "Permission denied" while attempting to 
+read or write user keys, log into LPC and restrict your core grid credentials:
+\$ chmod 600 ~/.globus/userkey.pem
+\$ chmod 644 ~/.globus/usercert.pem
+
+--------------------------------------------------------------------------------
+6. INSPECTING LIMITS VIA LOCAL PYTHON (JUPYTER NOTEBOOK)
+--------------------------------------------------------------------------------
+Activate your local virtual python environment and ensure uproot is installed:
+\$ pip install uproot awkward matplotlib numpy
+
+Run this tracking block in your notebook cell to check the array contents 
+of your Combine files:
+
+```python
+import uproot
+import os
+
+file_paths = [
+    "output/mue_5000p25300.root",
+    "output/mue_5001p2300.root",
+    "output/mue_5005p20.root"
+]
+
+for path in file_paths:
+    if not os.path.exists(path):
+        print(f"❌ Missing: {path}")
+        continue
+    
+    with uproot.open(path) as f:
+        limit_tree = f["limit"]
+        raw_limits = limit_tree["limit"].array()
+        print(f"✅ File: {path} -> Limit Matrix: {list(raw_limits)}")
+```
+
+--------------------------------------------------------------------------------
+7. LIMIT VALUE INTERPRETATION KEY
+--------------------------------------------------------------------------------
+The output matrix data corresponds to upper limits on the signal strength 
+modifier (r) at a 95% Confidence Level:
+- r = 1.0 represents your exact theoretical physics cross section.
+- If your Expected 50% (Median) and Observed markers drop below 1.0, your 
+  analysis is successfully sensitive enough to exclude that specific theory model.
+- The 2.5% and 97.5% boundaries outline your outer ±2σ Yellow Brazil Band, 
+  while the 16.0% and 84.0% values trace your inner ±1σ Green Brazil Band.
+================================================================================
+
+
+
+
+genBS_genA_kinematics: &genBS_genA_kinematics
+  - "genBS_pt"
+  - "genBS_eta"
+  - "genBS_phi"
+  - "genBS_mass"
+  - "genBS_n"
+  - "genA_n"
+  - "genBS_from_genAs_pt"
+  - "genBS_from_genAs_eta"
+  - "genBS_from_genAs_phi"
+  - "genBS_from_genAs_mass"
+  - "genAs_pt"
+  - "genAs_eta"
+  - "genAs_phi"
+  - "genAs_mass"
+  - "genAs_gamma"
+  - "genAs_cosTheta_bsFrame"
+  - "genAs_cosTheta_centralBS"
+  - "genMus_fromA_n"
+  - "genEs_fromA_n"
+  - "genA_from_genMus_pt"
+  - "genA_from_genEs_pt"
+  - "genA_from_genMus_eta"
+  - "genA_from_genEs_eta"
+  - "genA_from_genMus_phi"
+  - "genA_from_genEs_phi"
+  - "genA_from_genMus_mass"
+  - "genA_from_genEs_mass"
+  - "genMu_AFrame_pt"
+  - "genE_AFrame_pt"
+  - "genMu0_AFrame_pt"
+  - "genE0_AFrame_pt"
+  - "genMu1_AFrame_pt"
+  - "genE1_AFrame_pt"
+  - "genMu_AFrame_absCosTheta"
+  - "genE_AFrame_absCosTheta"
+  - "genMu_ptRatio_vs_absCosTheta"
+  - "genE_ptRatio_vs_absCosTheta"
+  - "genMus_fromA_status"
+  - "genEs_fromA_status"
+  - "genMus_fromA_eta"
+  - "genEs_fromA_eta"
+  - "genMus_status"
+  - "genEs_status"
+
+
+
+
+cd nobackup/
+cd comb/
+cd CMSSW_14_1_0_pre4/src/
+source /cvmfs/cms.cern.ch/cmsset_default.sh
+cmsenv
+cd finsidm/
+combine -M AsymptoticLimits tmu_235.txt -n 235
+
+
+# Process	Common Color	Hex
+# DY/Z+jets	        Yellow/Gold	     #FFD700
+# TTJets / ttbar  	Red	             #E74C3C
+# QCD             	Blue	         #3498DB
+# W+jets	            Green	         #2ECC71
+# Diboson (WW/WZ/ZZ)	Purple	         #9B59B6
+# Single Top	        Orange           #F39C12
+
+# Signal	            Black          (#000000)
+# Alternative signal	Dark magenta   (#8E44AD)
+# Alternative signal	Dark blue      (#1F77B4)
+
+
+
+If you only need to switch branches temporarily:
+
+git stash
+git switch other_branch
+
+When you come back:
+
+git switch your_branch
+git stash pop
+
+git add sidm/configs/selections.yaml sidm/definitions/hists.py sidm/definitions/cuts.py
+sidm/configs/hist_collections.yaml sidm/configs/selections.yaml sidm/definitions/cuts.py sidm/definitions/hists.py sidm/tools/scaleout.py sidm/tools/sidm_processor.py
+
+Y: Change back to Code.
+M: Change to Markdown
+R: Change to Raw
